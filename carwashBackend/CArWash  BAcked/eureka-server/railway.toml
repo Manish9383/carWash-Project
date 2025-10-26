@@ -1,4 +1,4 @@
 [build]
 builder = "dockerfile"
-dockerfilePath = "Dockerfile"
+dockerfilePath = "carwashBackend/CArWash  BAcked/eureka-server/Dockerfile"
 watchPatterns = ["src/**/*", "pom.xml", "Dockerfile"]
