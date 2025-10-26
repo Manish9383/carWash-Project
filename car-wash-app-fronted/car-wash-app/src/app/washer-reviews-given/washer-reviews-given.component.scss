@@ -1,0 +1,108 @@
+.review-container {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 25px;
+  background: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  font-family: 'Roboto', sans-serif;
+
+  .review-header {
+    text-align: center;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #e0e0e0;
+
+    h2 {
+      font-size: 28px;
+      color: #2c3e50;
+      margin: 0;
+    }
+  }
+
+  .review-content {
+    padding: 20px;
+
+    .loading {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      color: #7f8c8d;
+      font-size: 16px;
+    }
+
+    .error-message, .success-message {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      font-size: 16px;
+    }
+
+    .error-message {
+      background: #fce4e4;
+      color: #c0392b;
+      mat-icon {
+        color: #c0392b;
+      }
+    }
+
+    .success-message {
+      background: #e8f5e9;
+      color: #27ae60;
+      mat-icon {
+        color: #27ae60;
+      }
+    }
+
+    .review-form-section {
+      .booking-details {
+        background: #f9f9f9;
+        padding: 15px;
+        border-radius: 10px;
+        margin-bottom: 20px;
+
+        p {
+          margin: 8px 0;
+          font-size: 16px;
+          color: #34495e;
+
+          strong {
+            color: #2c3e50;
+          }
+        }
+      }
+
+      .review-form {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+        .rating-field, .comment-field {
+          width: 100%;
+        }
+
+        .submit-button {
+          background: linear-gradient(90deg, #3498db, #2980b9);
+          color: #ffffff;
+          padding: 12px;
+          font-size: 16px;
+          text-transform: uppercase;
+          border-radius: 25px;
+          transition: background 0.3s ease;
+
+          &:hover {
+            background: linear-gradient(90deg, #2980b9, #1f6391);
+          }
+
+          &[disabled] {
+            background: #bdc3c7;
+            cursor: not-allowed;
+          }
+        }
+      }
+    }
+  }
+}

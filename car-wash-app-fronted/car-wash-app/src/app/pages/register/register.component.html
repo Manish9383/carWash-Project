@@ -1,0 +1,142 @@
+<div class="container">
+  <!-- Left Column - Promotional Section -->
+  <div class="left-column">
+    <!-- Logo and Branding -->
+    <div class="logo-section">
+      <div class="logo-container">
+        <div class="logo-icon">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2C13.1 2 14 2.9 14 4C14 5.1 13.1 6 12 6C10.9 6 10 5.1 10 4C10 2.9 10.9 2 12 2ZM21 9V7L15 1H5C3.89 1 3 1.89 3 3V21C3 22.11 3.89 23 5 23H19C20.11 23 21 22.11 21 21V9M19 9H14V4L19 9Z" fill="url(#gradient1)"/>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <h1 class="brand-name">AquaWash</h1>
+          <p class="tagline">On-Demand Car Wash</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Heading -->
+    <div class="main-heading">
+      <h2 class="heading-text">Your Car Deserves</h2>
+      <h2 class="heading-highlight">Premium Care</h2>
+    </div>
+
+    <!-- Descriptive Text -->
+    <div class="description">
+      <p>Join thousands of satisfied customers who trust AquaWash for professional, eco-friendly car wash services delivered right to your doorstep.</p>
+    </div>
+
+    <!-- Statistics Cards -->
+    <div class="stats-container">
+      <div class="stat-card">
+        <div class="stat-number">15K+</div>
+        <div class="stat-label">Happy Customers</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">50+</div>
+        <div class="stat-label">Cities Covered</div>
+      </div>
+    </div>
+
+    <!-- Background Effects -->
+    <div class="background-effects">
+      <div class="gradient-orb orb-1"></div>
+      <div class="gradient-orb orb-2"></div>
+      <div class="gradient-orb orb-3"></div>
+    </div>
+  </div>
+
+  <!-- Right Column - Registration Form -->
+  <div class="right-column">
+    <!-- Form Container -->
+    <div class="form-container">
+      <!-- Get Started Button -->
+      <div class="get-started-btn">
+        <button class="btn-get-started">
+          <span class="star-icon">★</span>
+          Get Started Today
+        </button>
+      </div>
+      <div class="form-header">
+        <h3 class="form-title">Create Your Account</h3>
+        <p class="form-subtitle">Sign up in seconds and experience premium car care</p>
+      </div>
+
+      <form class="registration-form" (ngSubmit)="register()" #registrationForm="ngForm">
+        <!-- Full Name -->
+        <div class="form-group">
+          <label for="fullName" class="form-label">Full Name</label>
+          <input type="text" id="fullName" name="fullName" [(ngModel)]="user.name" class="form-input" placeholder="John Doe" required>
+          <div class="error-message" *ngIf="formErrors['name']">{{ formErrors['name'] }}</div>
+        </div>
+
+        <!-- Email Address -->
+        <div class="form-group">
+          <label for="email" class="form-label">Email Address</label>
+          <input type="email" id="email" name="email" [(ngModel)]="user.email" class="form-input" placeholder="john@example.com" required>
+          <div class="error-message" *ngIf="formErrors['email']">{{ formErrors['email'] }}</div>
+        </div>
+
+        <!-- Password -->
+        <div class="form-group">
+          <label for="password" class="form-label">Password</label>
+          <input [type]="showPassword ? 'text' : 'password'" id="password" name="password" [(ngModel)]="user.password" class="form-input" placeholder="Create a strong password" required>
+          <div class="error-message" *ngIf="formErrors['password']">{{ formErrors['password'] }}</div>
+        </div>
+
+        <!-- Mobile Number -->
+        <div class="form-group">
+          <label for="mobile" class="form-label">Mobile Number</label>
+          <input type="tel" id="mobile" name="mobile" [(ngModel)]="user.phone" class="form-input" placeholder="+1 (555) 123-4567" required>
+          <div class="error-message" *ngIf="formErrors['phone']">{{ formErrors['phone'] }}</div>
+        </div>
+
+        <!-- Service Selection -->
+        <div class="service-selection">
+          <label class="service-label">I want to</label>
+          <div class="service-toggle">
+            <input type="radio" id="customer" name="serviceType" value="CUSTOMER" [(ngModel)]="user.role" required>
+            <input type="radio" id="washer" name="serviceType" value="WASHER" [(ngModel)]="user.role" required>
+            <div class="toggle-labels">
+              <label for="washer" class="toggle-label">
+                <span class="toggle-icon">💧</span>
+                <span class="toggle-text">Washer</span>
+              </label>
+              <label for="customer" class="toggle-label">
+                <span class="toggle-icon">🚗</span>
+                <span class="toggle-text">Customer</span>
+              </label>
+            </div>
+            <div class="toggle-slider"></div>
+          </div>
+          <div class="error-message" *ngIf="formErrors['role']">{{ formErrors['role'] }}</div>
+        </div>
+
+        <!-- General Error Message -->
+        <div class="error-message general-error" *ngIf="formErrors['general']">{{ formErrors['general'] }}</div>
+
+        <!-- Create Account Button -->
+        <button type="submit" class="btn-create-account" [disabled]="isLoading">
+          <span *ngIf="!isLoading">Create Account</span>
+          <span *ngIf="isLoading">Creating Account...</span>
+        </button>
+
+        <!-- Login Link -->
+        <div class="login-link">
+          <span>Already have an account?</span>
+          <a routerLink="/login" class="sign-in-link">Sign In</a>
+        </div>
+      </form>
+    </div>
+
+    <!-- Background Effects -->
+    <div class="background-effects">
+      <div class="gradient-orb orb-4"></div>
+      <div class="gradient-orb orb-5"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Grid Pattern Overlay -->
+<div class="grid-overlay"></div>

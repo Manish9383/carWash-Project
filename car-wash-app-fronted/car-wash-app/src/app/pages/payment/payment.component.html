@@ -1,0 +1,71 @@
+<!-- Modal Overlay -->
+<div class="modal-overlay" *ngIf="showModal" (click)="cancel()">
+  <!-- Modal Content -->
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <!-- Modal Header -->
+    <div class="modal-header">
+      <h2 class="modal-title">Secure Payment</h2>
+      <button class="close-btn" (click)="cancel()" aria-label="Close">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Modal Body -->
+    <div class="modal-body">
+      <!-- Booking Details -->
+      <div class="booking-summary" *ngIf="!paymentSuccess && booking">
+        <div class="summary-item">
+          <span class="label">Package:</span>
+          <span class="value">{{ booking.washPackage | titlecase }} Wash</span>
+        </div>
+        <div class="summary-item">
+          <span class="label">Amount:</span>
+          <span class="value">${{ amount }}</span>
+        </div>
+        <div class="summary-item">
+          <span class="label">Car Model:</span>
+          <span class="value">{{ booking.carId }}</span>
+        </div>
+        <div class="summary-item">
+          <span class="label">Location:</span>
+          <span class="value">{{ booking.location }}</span>
+        </div>
+        <div class="summary-item">
+          <span class="label">Scheduled Time:</span>
+          <span class="value">{{ booking.scheduledTime | date:'medium' }}</span>
+        </div>
+      </div>
+
+      <!-- Payment Form or Success State -->
+      <div class="payment-section">
+        <div *ngIf="!paymentSuccess">
+          <div class="payment-form">
+            <div id="dropin-container" *ngIf="clientToken" class="dropin-wrapper"></div>
+            <div class="spinner" *ngIf="loading">
+              <div class="google-spinner"></div>
+              <p>Processing your payment...</p>
+            </div>
+            <div *ngIf="errorMessage && !loading" class="error-message">{{ errorMessage }}</div>
+            <div class="action-buttons" *ngIf="!loading">
+              <button mat-button (click)="cancel()" class="cancel-button">Cancel</button>
+              <button mat-raised-button color="primary" (click)="makePayment()" class="pay-button">Pay with Card</button>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="paymentSuccess" class="success-section">
+          <div class="success-icon">
+            <svg viewBox="0 0 24 24" class="check-icon">
+              <path fill="currentColor" d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/>
+            </svg>
+          </div>
+          <p class="success-text">{{ successMessage }}</p>
+          <p class="redirect-text">Redirecting to your orders...</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

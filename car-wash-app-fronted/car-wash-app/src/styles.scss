@@ -1,0 +1,52 @@
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+
+// CSS Variables for theming
+:root {
+  --primary-bg: #1a1a1a;
+  --secondary-bg: #242424;
+  --text-color: #ffffff;
+  --text-secondary: #aaaaaa;
+  --primary-text: #ffffff;
+  --secondary-text: #aaaaaa;
+  --accent-color: #ff9900;
+  --accent-hover: #ffad33;
+  --border-color: rgba(255, 255, 255, 0.03);
+  --shadow-color: rgba(255, 153, 0, 0.08);
+  --card-bg: rgba(255, 255, 255, 0.018);
+  --input-bg: rgba(255, 255, 255, 0.01);
+  --button-bg: linear-gradient(90deg, #ff9900 0%, #ffad33 100%);
+  --button-hover: linear-gradient(90deg, #ffad33 0%, #ff9900 100%);
+  --bg-color: #1a1a1a;
+  --pending-color: #9C27B0;
+  --accepted-color: #3F51B5;
+  --completed-color: #4CAF50;
+  --canceled-color: #757575;
+  --danger-color: #EF5350;
+  --success-color: #66BB6A;
+  --btn-secondary-bg: #424242;
+  --btn-secondary-hover: #555555;
+  --border-radius: 12px;
+  --font-family: 'Inter', sans-serif;
+}
+
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Arial', sans-serif;
+}
+
+body {
+  background-color: var(--primary-bg);
+  color: var(--text-color);
+  display: flex;
+  height: 100vh;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+

@@ -1,0 +1,15 @@
+
+<mat-toolbar style="width:100vw;display:flex;justify-content: space-between;" color="primary">
+  <span>AquaShine</span>
+  <span class="spacer"></span>
+  <button mat-button routerLink="/home">Home</button>
+  <button mat-button routerLink="/book-service" *ngIf="isCustomer()">Book Service</button>
+  <button mat-button routerLink="/washer-dashboard" *ngIf="isWasher()">Washer Dashboard</button>
+  <button mat-button routerLink="/booking-history" *ngIf="!isWasher() && !isAdmin()">History</button>
+  <!-- <button mat-button routerLink="/payment">Payment</button> -->
+  <button mat-button routerLink="/profile">Profile</button>
+  <button mat-button routerLink="/admin-dashboard" *ngIf="isAdmin()">Admin</button>
+  <button mat-button routerLink="/login" *ngIf="!isAuthenticated()">Login</button>
+  <button mat-button routerLink="/register" *ngIf="!isAuthenticated()">Register</button>
+  <button mat-button (click)="logout()" *ngIf="isAuthenticated()">Logout</button>
+</mat-toolbar>

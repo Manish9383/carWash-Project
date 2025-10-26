@@ -1,0 +1,87 @@
+name: Build and Deploy
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up JDK 21
+      uses: actions/setup-java@v3
+      with:
+        java-version: '21'
+        distribution: 'temurin'
+
+    - name: Login to Docker Hub
+      uses: docker/login-action@v2
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+
+    - name: Build and push frontend
+      run: |
+        cd car-wash-app-fronted/car-wash-app
+        docker build -t ${{ secrets.DOCKER_USERNAME }}/carwash-frontend:latest .
+        docker push ${{ secrets.DOCKER_USERNAME }}/carwash-frontend:latest
+
+    - name: Build and push eureka-server
+      run: |
+        cd carwashBackend/CArWash\ BAcked/eureka-server
+        mvn clean package -DskipTests
+        docker build -t ${{ secrets.DOCKER_USERNAME }}/eureka-server:latest .
+        docker push ${{ secrets.DOCKER_USERNAME }}/eureka-server:latest
+
+    - name: Build and push api-gateway
+      run: |
+        cd carwashBackend/CArWash\ BAcked/api-gateway
+        mvn clean package -DskipTests
+        docker build -t ${{ secrets.DOCKER_USERNAME }}/api-gateway:latest .
+        docker push ${{ secrets.DOCKER_USERNAME }}/api-gateway:latest
+
+    - name: Build and push user-service
+      run: |
+        cd carwashBackend/CArWash\ BAcked/user-service
+        mvn clean package -DskipTests
+        docker build -t ${{ secrets.DOCKER_USERNAME }}/user-service:latest .
+        docker push ${{ secrets.DOCKER_USERNAME }}/user-service:latest
+
+    - name: Build and push booking-service
+      run: |
+        cd carwashBackend/CArWash\ BAcked/booking-service
+        mvn clean package -DskipTests
+        docker build -t ${{ secrets.DOCKER_USERNAME }}/booking-service:latest .
+        docker push ${{ secrets.DOCKER_USERNAME }}/booking-service:latest
+
+    - name: Build and push payment-service
+      run: |
+        cd carwashBackend/CArWash\ BAcked/payment-service
+        mvn clean package -DskipTests
+        docker build -t ${{ secrets.DOCKER_USERNAME }}/payment-service:latest .
+        docker push ${{ secrets.DOCKER_USERNAME }}/payment-service:latest
+
+    - name: Build and push review-service
+      run: |
+        cd carwashBackend/CArWash\ BAcked/review-service
+        mvn clean package -DskipTests
+        docker build -t ${{ secrets.DOCKER_USERNAME }}/review-service:latest .
+        docker push ${{ secrets.DOCKER_USERNAME }}/review-service:latest
+
+    - name: Build and push notification-service
+      run: |
+        cd carwashBackend/CArWash\ BAcked/notification-service
+        mvn clean package -DskipTests
+        docker build -t ${{ secrets.DOCKER_USERNAME }}/notification-service:latest .
+        docker push ${{ secrets.DOCKER_USERNAME }}/notification-service:latest
+
+    - name: Build and push car-service
+      run: |
+        cd carwashBackend/CArWash\ BAcked/car-service
+        mvn clean package -DskipTests
+        docker build -t ${{ secrets.DOCKER_USERNAME }}/car-service:latest .
+        docker push ${{ secrets.DOCKER_USERNAME }}/car-service:latest

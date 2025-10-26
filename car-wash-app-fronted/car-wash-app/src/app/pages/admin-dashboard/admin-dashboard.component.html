@@ -1,0 +1,699 @@
+<div class="admin-dashboard-layout">
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <span class="logo">Admin</span>
+    </div>
+    <nav class="sidebar-nav">
+      <button class="nav-item" [class.active]="activeTab === 'customers'" (click)="setActiveTab('customers')" [disabled]="isLoading">
+        <mat-icon>person</mat-icon>
+        <span>Customers</span>
+      </button>
+      <button class="nav-item" [class.active]="activeTab === 'washers'" (click)="setActiveTab('washers')" [disabled]="isLoading">
+        <mat-icon>people</mat-icon>
+        <span>Washers</span>
+      </button>
+      <button class="nav-item" [class.active]="activeTab === 'orders'" (click)="setActiveTab('orders')" [disabled]="isLoading">
+        <mat-icon>assignment</mat-icon>
+        <span>Orders</span>
+      </button>
+      <button class="nav-item" [class.active]="activeTab === 'promoCodes'" (click)="setActiveTab('promoCodes')" [disabled]="isLoading">
+        <mat-icon>local_offer</mat-icon>
+        <span>Promo Codes</span>
+      </button>
+      <button class="nav-item" [class.active]="activeTab === 'servicePlans'" (click)="setActiveTab('servicePlans')" [disabled]="isLoading">
+        <mat-icon>build</mat-icon>
+        <span>Service Plans</span>
+      </button>
+      <button class="nav-item" [class.active]="activeTab === 'addOns'" (click)="setActiveTab('addOns')" [disabled]="isLoading">
+        <mat-icon>extension</mat-icon>
+        <span>Add-Ons</span>
+      </button>
+    </nav>
+  </aside>
+  <main class="main-content">
+    <h2 class="dashboard-title">Admin Dashboard</h2>
+    <!-- messages are scoped per-tab to avoid leaking across sections -->
+    <!-- Customers Tab -->
+    <div *ngIf="activeTab === 'customers'" class="tab-content customers-tab">
+      <section class="section customers-section">
+        <div class="customers-header">
+          <h3>Customers</h3>
+          <!-- Add Customer button removed: not implemented -->
+        </div>
+        <mat-form-field appearance="outline" class="search-field">
+          <mat-label>Search Customers</mat-label>
+          <input matInput [(ngModel)]="customerSearchTerm" (input)="filterCustomers()" placeholder="Search by name, email, or phone">
+          <button mat-icon-button matSuffix *ngIf="customerSearchTerm" (click)="customerSearchTerm=''; filterCustomers();">
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-form-field>
+        <div *ngIf="isLoading" class="loading-overlay">
+          <mat-spinner diameter="50"></mat-spinner>
+        </div>
+        <div class="customers-table-wrapper">
+          <div class="customers-table">
+            <div class="customers-table-header">
+              <div class="customers-table-col avatar-col"></div>
+              <div class="customers-table-col name-col">Name</div>
+              <div class="customers-table-col email-col">Email</div>
+              <div class="customers-table-col phone-col">Phone</div>
+              <div class="customers-table-col status-col">Status</div>
+              <div class="customers-table-col actions-col">Actions</div>
+            </div>
+            <div class="customers-table-row" *ngFor="let customer of filteredCustomers.data">
+              <div class="customers-table-col avatar-col">
+                <span class="customer-avatar-list">
+                  <ng-container *ngIf="customer.profilePicture; else defaultAvatar">
+                    <img [src]="customer.profilePicture" alt="Profile" class="customer-avatar-img" />
+                  </ng-container>
+                  <ng-template #defaultAvatar>
+                    <mat-icon>person</mat-icon>
+                  </ng-template>
+                </span>
+              </div>
+              <div class="customers-table-col name-col customer-table-text">{{ customer.fullName }}</div>
+              <div class="customers-table-col email-col customer-table-text"><mat-icon>email</mat-icon> {{ customer.email }}</div>
+              <div class="customers-table-col phone-col customer-table-text"><mat-icon>phone</mat-icon> {{ customer.phone || 'N/A' }}</div>
+              <div class="customers-table-col status-col">
+                <span class="customer-status-list" [ngClass]="customer.active ? 'active' : 'inactive'">
+                  <mat-icon>{{ customer.active ? 'check_circle' : 'block' }}</mat-icon>
+                  {{ customer.active ? 'Active' : 'Inactive' }}
+                </span>
+              </div>
+              <div class="customers-table-col actions-col">
+                <button mat-icon-button color="primary" (click)="viewReviews(customer, 'CUSTOMER')" [disabled]="isLoading" matTooltip="View Customer Ratings">
+                  <mat-icon>star</mat-icon>
+                </button>
+                <button mat-icon-button color="accent" (click)="openEditDialog(customer, 'CUSTOMER')" [disabled]="isLoading" matTooltip="Edit Customer Profile">
+                  <mat-icon>edit</mat-icon>
+                </button>
+                <button mat-icon-button [color]="customer.active ? 'warn' : 'primary'" (click)="toggleActive(customer, 'CUSTOMER')" [disabled]="isLoading" matTooltip="{{ customer.active ? 'Deactivate' : 'Activate' }} Customer">
+                  <mat-icon>{{ customer.active ? 'block' : 'check_circle' }}</mat-icon>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+  <div *ngIf="!isLoading && filteredCustomers.data && filteredCustomers.data.length === 0" class="no-customers">
+          <mat-icon>info</mat-icon> No customers found.
+        </div>
+      </section>
+    </div>
+
+  <!-- Washers Tab -->
+
+
+
+
+  <div *ngIf="activeTab === 'washers'" class="tab-content washers-tab">
+    <section class="section washers-section">
+      <div class="customers-header">
+        <h3>Washers</h3>
+        <button mat-raised-button color="primary" class="add-customer-btn" (click)="openAddWasherDialog()" [disabled]="isLoading">
+          <mat-icon>add</mat-icon>
+          Add New Washer
+        </button>
+      </div>
+      <mat-form-field appearance="outline" class="search-field">
+        <mat-label>Search Washers</mat-label>
+        <input matInput [(ngModel)]="washerSearchTerm" (input)="filterWashers()" placeholder="Search by name, email, or phone">
+        <button mat-icon-button matSuffix *ngIf="washerSearchTerm" (click)="washerSearchTerm=''; filterWashers();">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+      <!-- Add New Washer moved to dialog popup -->
+      <div *ngIf="isLoading && !showAddWasherForm" class="loading-overlay">
+        <mat-spinner diameter="50"></mat-spinner>
+      </div>
+      <div class="washers-table-wrapper">
+        <table mat-table [dataSource]="filteredWashers" class="washers-table mat-elevation-z2" role="table">
+
+          <!-- Avatar Column -->
+          <ng-container matColumnDef="avatar">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let washer" [attr.data-label]="'Avatar'">
+              <span class="washer-avatar">
+                <ng-container *ngIf="washer.profilePicture; else defaultWasherAvatarSmall">
+                  <img [src]="washer.profilePicture" alt="Profile" class="washer-avatar-img" />
+                </ng-container>
+                <ng-template #defaultWasherAvatarSmall>
+                  <mat-icon>person</mat-icon>
+                </ng-template>
+              </span>
+            </td>
+          </ng-container>
+
+          <!-- Name Column -->
+          <ng-container matColumnDef="fullName">
+            <th mat-header-cell *matHeaderCellDef> Name </th>
+            <td mat-cell *matCellDef="let washer" [attr.data-label]="'Name'"> {{ washer.fullName }} </td>
+          </ng-container>
+
+          <!-- Email Column -->
+          <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef> Email </th>
+            <td mat-cell *matCellDef="let washer" [attr.data-label]="'Email'"> <mat-icon class="col-icon">email</mat-icon> {{ washer.email }} </td>
+          </ng-container>
+
+          <!-- Phone Column -->
+          <ng-container matColumnDef="phone">
+            <th mat-header-cell *matHeaderCellDef> Phone </th>
+            <td mat-cell *matCellDef="let washer" [attr.data-label]="'Phone'"> <mat-icon class="col-icon">phone</mat-icon> {{ washer.phone || 'N/A' }} </td>
+          </ng-container>
+
+          <!-- Service Status Column -->
+          <ng-container matColumnDef="serviceStatus">
+            <th mat-header-cell *matHeaderCellDef> Status </th>
+            <td mat-cell *matCellDef="let washer" [attr.data-label]="'Status'">
+              <span class="washer-status-badge" [ngClass]="washer.serviceStatus === 'ONLINE' ? 'online' : 'offline'">{{ washer.serviceStatus || (washer.active ? 'UNKNOWN' : 'OFFLINE') }}</span>
+            </td>
+          </ng-container>
+
+          <!-- Active Column -->
+          <ng-container matColumnDef="active">
+            <th mat-header-cell *matHeaderCellDef> Active </th>
+            <td mat-cell *matCellDef="let washer" [attr.data-label]="'Active'"> <mat-icon>{{ washer.active ? 'check_circle' : 'block' }}</mat-icon> </td>
+          </ng-container>
+
+          <!-- Actions Column -->
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef> Actions </th>
+            <td mat-cell *matCellDef="let washer" [attr.data-label]="'Actions'">
+              <div class="washer-actions">
+                <button mat-icon-button color="primary" (click)="viewReviews(washer, 'WASHER')" [disabled]="isLoading" matTooltip="View Washer Ratings">
+                  <mat-icon>star</mat-icon>
+                </button>
+                <button mat-icon-button color="accent" (click)="openEditDialog(washer, 'WASHER')" [disabled]="isLoading" matTooltip="Edit Washer Profile">
+                  <mat-icon>edit</mat-icon>
+                </button>
+                <button mat-icon-button [color]="washer.active ? 'warn' : 'primary'" (click)="toggleActive(washer, 'WASHER')" [disabled]="isLoading" matTooltip="{{ washer.active ? 'Deactivate' : 'Activate' }} Washer">
+                  <mat-icon>{{ washer.active ? 'block' : 'check_circle' }}</mat-icon>
+                </button>
+              </div>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="['avatar','fullName','email','phone','serviceStatus','active','actions']"></tr>
+          <tr mat-row *matRowDef="let row; columns: ['avatar','fullName','email','phone','serviceStatus','active','actions'];"></tr>
+        </table>
+        <div *ngIf="!isLoading && filteredWashers.data && filteredWashers.data.length === 0" class="no-washers">
+          <mat-icon>info</mat-icon> No washers found.
+        </div>
+      </div>
+      <div *ngIf="!isLoading && filteredWashers.data && filteredWashers.data.length === 0" class="no-customers">
+        <mat-icon>info</mat-icon> No washers found.
+      </div>
+    </section>
+  </div>
+
+  <!-- Orders Tab -->
+  <div *ngIf="activeTab === 'orders'" class="tab-content">
+    <section class="section">
+      <h3>Orders</h3>
+      <!-- Modern Orders Toolbar -->
+      <div class="orders-toolbar">
+        <div class="toolbar-left">
+          <h4>Orders</h4>
+          <mat-form-field appearance="outline" class="table-search">
+            <mat-label>Search orders</mat-label>
+            <input matInput placeholder="Order ID, customer or car" [formControl]="orderNumberControl">
+            <button mat-icon-button matSuffix *ngIf="reportForm.get('orderNumber')?.value" (click)="reportForm.patchValue({ orderNumber: '' }); loadFilteredBookings();">
+              <mat-icon>close</mat-icon>
+            </button>
+          </mat-form-field>
+        </div>
+        <div class="toolbar-right">
+          <button mat-stroked-button color="primary" (click)="showReportFilters = !showReportFilters">
+            <mat-icon>{{ showReportFilters ? 'filter_list_off' : 'filter_list' }}</mat-icon>
+            {{ showReportFilters ? 'Hide Filters' : 'Filters' }}
+          </button>
+          <button mat-raised-button color="accent" (click)="generateFilteredReport()" [disabled]="isLoading">
+            <mat-icon>download</mat-icon> Export Report
+          </button>
+        </div>
+      </div>
+
+      <!-- Filter Panel -->
+      <div class="filter-panel" *ngIf="showReportFilters">
+        <form [formGroup]="reportForm" class="filter-form">
+          <mat-form-field appearance="fill">
+            <mat-label>Washer Name</mat-label>
+            <input matInput formControlName="washerName" placeholder="Washer name">
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Status</mat-label>
+            <mat-select formControlName="status">
+              <mat-option value="">All</mat-option>
+              <mat-option value="PENDING">Pending</mat-option>
+              <mat-option value="ASSIGNED">Assigned</mat-option>
+              <mat-option value="ACCEPTED">Accepted</mat-option>
+              <mat-option value="PROCESSING">Processing</mat-option>
+              <mat-option value="COMPLETED">Completed</mat-option>
+              <mat-option value="DECLINED">Declined</mat-option>
+              <mat-option value="CANCELED">Canceled</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Start Date</mat-label>
+            <input matInput [matDatepicker]="startPicker" formControlName="startDate">
+            <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+            <mat-datepicker #startPicker></mat-datepicker>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>End Date</mat-label>
+            <input matInput [matDatepicker]="endPicker" formControlName="endDate">
+            <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+            <mat-datepicker #endPicker></mat-datepicker>
+          </mat-form-field>
+        </form>
+      </div>
+
+  <!-- Assign side panel -->
+      <div class="assign-panel" [class.open]="showAssignPanel">
+        <div class="assign-panel-header">
+          <h4>Assign Washer</h4>
+          <button mat-icon-button (click)="showAssignPanel=false; selectedBooking=null; assignOrderForm.reset();">
+            <mat-icon>close</mat-icon>
+          </button>
+        </div>
+        <div class="assign-panel-body">
+          <div *ngIf="selectedBooking" class="selected-booking">
+            <p><strong>Booking:</strong> {{ selectedBooking.id }} — {{ selectedBooking.washPackage }}</p>
+            <p><strong>Customer:</strong> {{ getCustomerName(selectedBooking.userId) }}</p>
+            <p><strong>Scheduled:</strong> {{ formatDate(selectedBooking.scheduledTime) }}</p>
+          </div>
+          <form [formGroup]="assignOrderForm" (ngSubmit)="assignOrder()" class="assign-form">
+            <!-- Assign panel washer table: shows all washers and allows assignment directly -->
+            <div class="assign-washers-table-wrapper">
+              <div class="assign-washers-header">
+                <label class="assign-washer-label">Available Washers</label>
+                <mat-form-field appearance="outline" class="assign-washer-search">
+                  <input matInput placeholder="Search washers" [(ngModel)]="washerDropdownSearch" [ngModelOptions]="{standalone: true}" />
+                </mat-form-field>
+              </div>
+              <table mat-table [dataSource]="washers" class="assign-washers-table" role="table">
+
+                <ng-container matColumnDef="avatar">
+                  <th mat-header-cell *matHeaderCellDef></th>
+                  <td mat-cell *matCellDef="let washer"><span class="washer-avatar"><ng-container *ngIf="washer.profilePicture; else defaultSmall"><img [src]="washer.profilePicture" class="washer-avatar-img"/></ng-container><ng-template #defaultSmall><mat-icon>person</mat-icon></ng-template></span></td>
+                </ng-container>
+
+                <ng-container matColumnDef="name">
+                  <th mat-header-cell *matHeaderCellDef> Name </th>
+                  <td mat-cell *matCellDef="let washer"> {{ washer.fullName }} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="email">
+                  <th mat-header-cell *matHeaderCellDef> Email </th>
+                  <td mat-cell *matCellDef="let washer"> {{ washer.email }} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="phone">
+                  <th mat-header-cell *matHeaderCellDef> Phone </th>
+                  <td mat-cell *matCellDef="let washer"> {{ washer.phone || 'N/A' }} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="status">
+                  <th mat-header-cell *matHeaderCellDef> Service Status </th>
+                  <td mat-cell *matCellDef="let washer"><span class="washer-status-badge" [ngClass]="washer.serviceStatus === 'ONLINE' ? 'online' : 'offline'">{{ washer.serviceStatus || 'OFFLINE' }}</span></td>
+                </ng-container>
+
+                <ng-container matColumnDef="active">
+                  <th mat-header-cell *matHeaderCellDef> Active </th>
+                  <td mat-cell *matCellDef="let washer"><mat-icon>{{ washer.active ? 'check_circle' : 'block' }}</mat-icon></td>
+                </ng-container>
+
+                <ng-container matColumnDef="assign">
+                  <th mat-header-cell *matHeaderCellDef> </th>
+                  <td mat-cell *matCellDef="let washer">
+                    <button mat-stroked-button color="primary" type="button" (click)="selectWasherFromDropdown(washer)" [disabled]="!washer.active || isLoading">
+                      <mat-icon>assignment_turned_in</mat-icon> Assign
+                    </button>
+                  </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="['avatar','name','email','phone','status','active','assign']"></tr>
+                <tr mat-row *matRowDef="let row; columns: ['avatar','name','email','phone','status','active','assign'];"></tr>
+              </table>
+
+              <div *ngIf="!isLoadingWashers && washers.data.length === 0" class="no-washers">No washers available</div>
+            </div>
+            <div class="assign-actions">
+              <button mat-stroked-button type="button" (click)="showAssignPanel=false; selectedBooking=null; assignOrderForm.reset();">Cancel</button>
+              <button mat-raised-button color="primary" type="submit" [disabled]="assignOrderForm.invalid || isLoading">
+                <mat-icon>assignment_turned_in</mat-icon> Assign
+              </button>
+            </div>
+            <!-- Inline washer list removed: selection now handled via the washers table above. Restore here if needed. -->
+            <div class="success-message" *ngIf="successMessage && !errorMessage && lastAction === 'assign'">
+              <mat-icon>check_circle</mat-icon> {{ successMessage }}
+            </div>
+            <div class="error-message" *ngIf="errorMessage">
+              <mat-icon>error</mat-icon> {{ errorMessage }}
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div *ngIf="isLoading && !assignOrderForm.dirty && !reportForm.dirty" class="loading-overlay">
+        <mat-spinner diameter="50"></mat-spinner>
+      </div>
+
+      <!-- Modern Orders Card -->
+      <div class="orders-card mat-elevation-z6">
+        <div class="orders-card-header">
+          <div class="orders-card-title">
+            <mat-icon>receipt_long</mat-icon>
+            <h4>Orders</h4>
+          </div>
+          <div class="orders-card-actions">
+            <!-- toolbar actions are shown above; kept minimal here -->
+          </div>
+        </div>
+
+        <div class="orders-card-body">
+          <div class="orders-table-wrapper">
+            <mat-table [dataSource]="filteredBookings" class="mat-elevation-z8 modern-orders-table">
+        <ng-container matColumnDef="id">
+          <mat-header-cell *matHeaderCellDef>ID</mat-header-cell>
+          <mat-cell *matCellDef="let booking" data-label="ID">{{ booking.id }}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="userId">
+          <mat-header-cell *matHeaderCellDef>Customer ID</mat-header-cell>
+          <mat-cell *matCellDef="let booking" data-label="Customer ID">{{ booking.userId }}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="customerName">
+          <mat-header-cell *matHeaderCellDef>Customer</mat-header-cell>
+          <mat-cell *matCellDef="let booking" data-label="Customer Name">
+            <div class="customers-table-col name-col customer-table-text" style="display:flex; align-items:center; gap:12px">
+              <span class="customer-avatar-list">
+                <img [src]="getCustomerProfile(booking.userId)" alt="Profile" class="customer-avatar-img" *ngIf="getCustomerProfile(booking.userId); else noCustPic" />
+                <ng-template #noCustPic><mat-icon>person</mat-icon></ng-template>
+              </span>
+              <span>{{ getCustomerName(booking.userId) || 'Unknown' }}</span>
+            </div>
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="carId">
+          <mat-header-cell *matHeaderCellDef>Car ID</mat-header-cell>
+          <mat-cell *matCellDef="let booking" data-label="Car ID">{{ booking.carId }}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="washPackage">
+          <mat-header-cell *matHeaderCellDef>Wash Package</mat-header-cell>
+          <mat-cell *matCellDef="let booking" data-label="Wash Package">{{ booking.washPackage }}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="status">
+          <mat-header-cell *matHeaderCellDef>Status</mat-header-cell>
+          <mat-cell *matCellDef="let booking" data-label="Status">
+            <span [ngClass]="{
+              'status-pending': booking.status === 'PENDING',
+              'status-assigned': booking.status === 'ASSIGNED',
+              'status-accepted': booking.status === 'ACCEPTED',
+              'status-processing': booking.status === 'PROCESSING',
+              'status-completed': booking.status === 'COMPLETED',
+              'status-declined': booking.status === 'DECLINED',
+              'status-canceled': booking.status === 'CANCELED'
+            }">
+              {{ booking.status }}
+            </span>
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="totalAmount">
+          <mat-header-cell *matHeaderCellDef>Total Amount</mat-header-cell>
+          <mat-cell *matCellDef="let booking" data-label="Total Amount">{{ booking.totalAmount | number:'1.2-2' }}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="scheduledTime">
+          <mat-header-cell *matHeaderCellDef>Scheduled Time</mat-header-cell>
+          <mat-cell *matCellDef="let booking" data-label="Scheduled Time">{{ formatDate(booking.scheduledTime) }}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="washerId">
+          <mat-header-cell *matHeaderCellDef>Washer</mat-header-cell>
+          <mat-cell *matCellDef="let booking" data-label="Washer">
+            {{ booking.washerId === 'Unassigned' ? 'Unassigned' : (getWasherName(booking.washerId) || 'Unknown') }}
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="actions">
+          <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
+          <mat-cell *matCellDef="let booking" data-label="Actions">
+            <button mat-icon-button color="primary" (click)="openAssignPanel(booking)" [disabled]="isLoading || loadingAssign[booking.id] || booking.status !== 'PENDING'" matTooltip="Assign Washer">
+              <mat-icon>assignment</mat-icon>
+            </button>
+          </mat-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="displayedBookingColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedBookingColumns;"></mat-row>
+      </mat-table>
+            </div> <!-- .orders-table-wrapper -->
+        </div> <!-- .orders-card-body -->
+      </div> <!-- .orders-card -->
+    </section>
+  </div>
+
+  <!-- Promo Codes Tab -->
+  <div *ngIf="activeTab === 'promoCodes'" class="tab-content promo-codes-tab">
+    <section class="section promo-codes-section">
+      <div class="customers-header">
+        <h3>Promo Codes</h3>
+        <button mat-raised-button color="primary" class="add-customer-btn" (click)="openEditPromoCodeDialog()" [disabled]="isLoading">
+          <mat-icon>add</mat-icon> Add New Promo Code
+        </button>
+      </div>
+      <mat-form-field appearance="outline" class="search-field">
+        <mat-label>Search Promo Codes</mat-label>
+        <input matInput [(ngModel)]="promoCodeSearchTerm" (input)="filterPromoCodes()" placeholder="Search by code or discount type">
+        <button mat-icon-button matSuffix *ngIf="promoCodeSearchTerm" (click)="promoCodeSearchTerm=''; filterPromoCodes();">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+      <div *ngIf="isLoading" class="loading-overlay">
+        <mat-spinner diameter="50"></mat-spinner>
+      </div>
+      <div class="promo-codes-card-grid">
+        <div *ngFor="let promo of filteredPromoCodes.data" class="promo-code-card mat-elevation-z4">
+          <div class="promo-code-card-header">
+            <mat-icon class="promo-code-icon">confirmation_number</mat-icon>
+            <span class="promo-code-code">{{ promo.code }}</span>
+            <span class="promo-code-status" [ngClass]="promo.active ? 'active' : 'inactive'">
+              <mat-icon>{{ promo.active ? 'check_circle' : 'block' }}</mat-icon>
+              {{ promo.active ? 'Active' : 'Inactive' }}
+            </span>
+          </div>
+          <div class="promo-code-card-body">
+            <div class="promo-code-discount"><mat-icon>percent</mat-icon> {{ promo.discountType }}: {{ promo.discountValue }}</div>
+            <div class="promo-code-expiry"><mat-icon>event</mat-icon> Expiry: {{ formatDate(promo.expiryDate) }}</div>
+            <div class="promo-code-uses"><mat-icon>repeat</mat-icon> Uses: {{ promo.currentUses }}/{{ promo.maxUses || 'Unlimited' }}</div>
+          </div>
+          <div class="promo-code-card-actions">
+            <button mat-icon-button color="accent" (click)="openEditPromoCodeDialog(promo)" [disabled]="isLoading" matTooltip="Edit Promo Code">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button color="warn" (click)="deletePromoCode(promo)" [disabled]="isLoading" matTooltip="Delete Promo Code">
+              <mat-icon>delete</mat-icon>
+            </button>
+            <button mat-icon-button [color]="promo.active ? 'warn' : 'primary'" (click)="togglePromoCodeStatus(promo)" [disabled]="isLoading" matTooltip="{{ promo.active ? 'Deactivate' : 'Activate' }} Promo Code">
+              <mat-icon>{{ promo.active ? 'block' : 'check_circle' }}</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="!isLoading && filteredPromoCodes.data && filteredPromoCodes.data.length === 0" class="no-customers">
+        <mat-icon>info</mat-icon> No promo codes found.
+      </div>
+    </section>
+  </div>
+
+  <!-- Service Plans Tab -->
+  <div *ngIf="activeTab === 'servicePlans'" class="tab-content service-plans-tab">
+    <section class="section service-plans-section">
+      <div class="customers-header">
+        <h3>Service Plans</h3>
+        <button mat-raised-button color="primary" class="add-customer-btn" (click)="openAddServicePlanDialog()" [disabled]="isLoading">
+          <mat-icon>add</mat-icon>
+          Add New Service Plan
+        </button>
+      </div>
+      <mat-form-field appearance="outline" class="search-field">
+        <mat-label>Search Service Plans</mat-label>
+        <input matInput [(ngModel)]="servicePlanSearchTerm" (input)="filterServicePlans()" placeholder="Search by name">
+        <button mat-icon-button matSuffix *ngIf="servicePlanSearchTerm" (click)="servicePlanSearchTerm=''; filterServicePlans();">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+      <ng-template #addServicePlanDialog>
+        <div class="add-on-dialog-container">
+          <div class="dialog-title">
+            <mat-icon style="font-size:2rem;color:#1976d2;vertical-align:middle;">build</mat-icon>
+            <span style="margin-left:8px;vertical-align:middle;">Add New Service Plan</span>
+          </div>
+          <form [formGroup]="addServicePlanForm" (ngSubmit)="addServicePlan(); closeAddServicePlanDialog()" class="add-on-dialog-form">
+            <mat-form-field appearance="outline" class="dialog-field">
+              <mat-label>Name</mat-label>
+              <input matInput formControlName="name" required placeholder="Service Plan Name" />
+              <mat-icon matPrefix>label</mat-icon>
+              <mat-error *ngIf="addServicePlanForm.get('name')?.hasError('required')">
+                Name is required
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="dialog-field">
+              <mat-label>Price</mat-label>
+              <input matInput formControlName="price" type="number" step="0.01" required placeholder="0.00" />
+              <mat-icon matPrefix>attach_money</mat-icon>
+              <mat-error *ngIf="addServicePlanForm.get('price')?.hasError('required')">
+                Price is required
+              </mat-error>
+              <mat-error *ngIf="addServicePlanForm.get('price')?.hasError('min')">
+                Price must be positive
+              </mat-error>
+            </mat-form-field>
+            <div class="success-message" *ngIf="successMessage">
+              <mat-icon>check_circle</mat-icon> {{ successMessage }}
+            </div>
+            <div class="error-message" *ngIf="errorMessage">
+              <mat-icon>error</mat-icon> {{ errorMessage }}
+            </div>
+            <div class="dialog-actions">
+              <button mat-stroked-button color="basic" type="button" (click)="closeAddServicePlanDialog()" [disabled]="isLoading">
+                <mat-icon>close</mat-icon> Cancel
+              </button>
+              <button mat-raised-button color="primary" type="submit" [disabled]="addServicePlanForm.invalid || isLoading">
+                <mat-icon>save</mat-icon> Add Service Plan
+              </button>
+            </div>
+            <div *ngIf="isLoading" class="loading-overlay">
+              <mat-spinner diameter="40"></mat-spinner>
+            </div>
+          </form>
+        </div>
+      </ng-template>
+      <div *ngIf="isLoading && !showAddServicePlanForm" class="loading-overlay">
+        <mat-spinner diameter="50"></mat-spinner>
+      </div>
+      <div class="service-plans-card-grid">
+        <div *ngFor="let plan of filteredServicePlans.data" class="service-plan-card mat-elevation-z4">
+          <div class="service-plan-card-header">
+            <mat-icon class="service-plan-icon">build</mat-icon>
+            <span class="service-plan-name">{{ plan.name }}</span>
+            <span class="service-plan-status" [ngClass]="plan.active ? 'active' : 'inactive'">
+              <mat-icon>{{ plan.active ? 'check_circle' : 'block' }}</mat-icon>
+              {{ plan.active ? 'Active' : 'Inactive' }}
+            </span>
+          </div>
+          <div class="service-plan-card-body">
+            <div class="service-plan-price"><mat-icon>attach_money</mat-icon> {{ plan.price | number:'1.2-2' }}</div>
+          </div>
+          <div class="service-plan-card-actions">
+            <button mat-icon-button color="accent" (click)="openEditServicePlanDialog(plan)" [disabled]="isLoading" matTooltip="Edit Service Plan">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button color="warn" (click)="deleteServicePlan(plan)" [disabled]="isLoading" matTooltip="Delete Service Plan">
+              <mat-icon>delete</mat-icon>
+            </button>
+            <button mat-icon-button [color]="plan.active ? 'warn' : 'primary'" (click)="toggleServicePlanStatus(plan)" [disabled]="isLoading" matTooltip="{{ plan.active ? 'Deactivate' : 'Activate' }} Service Plan">
+              <mat-icon>{{ plan.active ? 'block' : 'check_circle' }}</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="!isLoading && filteredServicePlans.data && filteredServicePlans.data.length === 0" class="no-customers">
+        <mat-icon>info</mat-icon> No service plans found.
+      </div>
+    </section>
+  </div>
+
+  <!-- Add-Ons Tab -->
+  <div *ngIf="activeTab === 'addOns'" class="tab-content add-ons-tab">
+    <section class="section add-ons-section">
+      <div class="customers-header">
+        <h3>Add-Ons</h3>
+        <button mat-raised-button color="primary" class="add-customer-btn" (click)="openAddAddOnDialog()" [disabled]="isLoading">
+          <mat-icon>add</mat-icon>
+          Add New Add-On
+        </button>
+      </div>
+      <mat-form-field appearance="outline" class="search-field">
+        <mat-label>Search Add-Ons</mat-label>
+        <input matInput [(ngModel)]="addOnSearchTerm" (input)="filterAddOns()" placeholder="Search by name">
+        <button mat-icon-button matSuffix *ngIf="addOnSearchTerm" (click)="addOnSearchTerm=''; filterAddOns();">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+      <ng-template #addAddOnDialog>
+        <div class="add-on-dialog-container">
+          <div class="dialog-title">
+            <mat-icon style="font-size:2rem;color:#1976d2;vertical-align:middle;">extension</mat-icon>
+            <span style="margin-left:8px;vertical-align:middle;">Add New Add-On</span>
+          </div>
+          <form [formGroup]="addAddOnForm" (ngSubmit)="addAddOn(); closeAddAddOnDialog()" class="add-on-dialog-form">
+            <mat-form-field appearance="outline" class="dialog-field">
+              <mat-label>Name</mat-label>
+              <input matInput formControlName="name" required placeholder="Add-On Name" />
+              <mat-icon matPrefix>label</mat-icon>
+              <mat-error *ngIf="addAddOnForm.get('name')?.hasError('required')">
+                Name is required
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="dialog-field">
+              <mat-label>Price</mat-label>
+              <input matInput formControlName="price" type="number" step="0.01" required placeholder="0.00" />
+              <mat-icon matPrefix>attach_money</mat-icon>
+              <mat-error *ngIf="addAddOnForm.get('price')?.hasError('required')">
+                Price is required
+              </mat-error>
+              <mat-error *ngIf="addAddOnForm.get('price')?.hasError('min')">
+                Price must be positive
+              </mat-error>
+            </mat-form-field>
+            <div class="success-message" *ngIf="successMessage">
+              <mat-icon>check_circle</mat-icon> {{ successMessage }}
+            </div>
+            <div class="error-message" *ngIf="errorMessage">
+              <mat-icon>error</mat-icon> {{ errorMessage }}
+            </div>
+            <div class="dialog-actions">
+              <button mat-stroked-button color="basic" type="button" (click)="closeAddAddOnDialog()" [disabled]="isLoading">
+                <mat-icon>close</mat-icon> Cancel
+              </button>
+              <button mat-raised-button color="primary" type="submit" [disabled]="addAddOnForm.invalid || isLoading">
+                <mat-icon>save</mat-icon> Add Add-On
+              </button>
+            </div>
+            <div *ngIf="isLoading" class="loading-overlay">
+              <mat-spinner diameter="40"></mat-spinner>
+            </div>
+          </form>
+        </div>
+      </ng-template>
+      <div *ngIf="isLoading && !showAddAddOnForm" class="loading-overlay">
+        <mat-spinner diameter="50"></mat-spinner>
+      </div>
+      <div class="add-ons-card-grid">
+        <div *ngFor="let addOn of filteredAddOns.data" class="add-on-card mat-elevation-z4">
+          <div class="add-on-card-header">
+            <mat-icon class="add-on-icon">extension</mat-icon>
+            <span class="add-on-name">{{ addOn.name }}</span>
+            <span class="add-on-status" [ngClass]="addOn.active ? 'active' : 'inactive'">
+              <mat-icon>{{ addOn.active ? 'check_circle' : 'block' }}</mat-icon>
+              {{ addOn.active ? 'Active' : 'Inactive' }}
+            </span>
+          </div>
+          <div class="add-on-card-body">
+            <div class="add-on-price"><mat-icon>attach_money</mat-icon> {{ addOn.price | number:'1.2-2' }}</div>
+          </div>
+          <div class="add-on-card-actions">
+            <button mat-icon-button color="accent" (click)="openEditAddOnDialog(addOn)" [disabled]="isLoading" matTooltip="Edit Add-On">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button color="warn" (click)="deleteAddOn(addOn)" [disabled]="isLoading" matTooltip="Delete Add-On">
+              <mat-icon>delete</mat-icon>
+            </button>
+            <button mat-icon-button [color]="addOn.active ? 'warn' : 'primary'" (click)="toggleAddOnStatus(addOn)" [disabled]="isLoading" matTooltip="{{ addOn.active ? 'Deactivate' : 'Activate' }} Add-On">
+              <mat-icon>{{ addOn.active ? 'block' : 'check_circle' }}</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="!isLoading && filteredAddOns.data && filteredAddOns.data.length === 0" class="no-customers">
+        <mat-icon>info</mat-icon> No add-ons found.
+      </div>
+    </section>
+  </div>

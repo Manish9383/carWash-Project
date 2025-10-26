@@ -1,0 +1,230 @@
+<div class="container">
+  <header class="dashboard-header">
+    <h1 class="main-title">AquaWash</h1>
+    <p class="subtitle">Manage your service status, requests, and orders in one place.</p>
+  </header>
+
+  <div *ngIf="!isWasher" class="access-denied">
+    <p>Access denied: You must be a washer to view this page.</p>
+  </div>
+
+  <div *ngIf="isWasher">
+    <section class="card service-status-card">
+      <div class="card-header">
+        <h3>Service Status</h3>
+        <label class="switch">
+          <input type="checkbox" id="serviceStatusToggle" [checked]="serviceStatus === 'ONLINE'" (change)="toggleServiceStatus()" [disabled]="loadingStatus">
+          <span class="slider round"></span>
+        </label>
+      </div>
+      <p class="status-text">Status: <span id="onlineStatus" [class]="serviceStatus === 'ONLINE' ? 'online' : 'offline'" [ngClass]="{'offline': serviceStatus === 'OFFLINE'}">{{ serviceStatus }}</span></p>
+      <mat-spinner diameter="20" *ngIf="loadingStatus"></mat-spinner>
+    </section>
+
+    <section class="section-title">
+      <h2>Today's Report</h2>
+    </section>
+    <section class="stats-grid" *ngIf="report; else loadingReport">
+      <div class="stat-card">
+        <i class="fas fa-dollar-sign icon-lg"></i>
+        <p>TOTAL EARNINGS</p>
+        <h2 class="stat-value">${{ report.totalEarnings | number:'1.2-2' }}</h2>
+      </div>
+      <div class="stat-card">
+        <i class="fas fa-clipboard-check icon-lg"></i>
+        <p>COMPLETED ORDERS</p>
+        <h2 class="stat-value">{{ report.totalCompletedOrders }}</h2>
+      </div>
+      <div class="stat-card">
+        <i class="fas fa-handshake icon-lg"></i>
+        <p>ACCEPTED ORDERS</p>
+        <h2 class="stat-value">{{ report.totalAcceptedOrders }}</h2>
+      </div>
+      <div class="stat-card">
+        <i class="fas fa-calendar-alt icon-lg"></i>
+        <p>REPORT DATE</p>
+        <h2 class="stat-value">{{ report.date }}</h2>
+      </div>
+    </section>
+    <ng-template #loadingReport>
+      <section class="stats-grid">
+        <div class="stat-card">
+          <mat-spinner diameter="40"></mat-spinner>
+          <p>Loading report...</p>
+        </div>
+      </section>
+    </ng-template>
+
+    <section class="section-title">
+      <h2>Pending Requests</h2>
+    </section>
+    <section class="card order-card" *ngFor="let request of requests">
+      <div class="status-badge pending">PENDING</div>
+      <div class="order-details-grid">
+        <div class="detail-group">
+          <p class="detail-label">REQUEST ID</p>
+          <p class="detail-value">{{ request.id }}</p>
+        </div>
+        <div class="detail-group">
+          <p class="detail-label">USER NAME</p>
+          <p class="detail-value"><i class="fas fa-user icon-sm"></i> {{ request.userName || 'N/A' }}</p>
+        </div>
+        <div class="detail-group">
+          <p class="detail-label">CAR</p>
+          <p class="detail-value"><i class="fas fa-car icon-sm"></i> {{ request.carId }}</p>
+        </div>
+        <div class="detail-group">
+          <p class="detail-label">PACKAGE</p>
+          <p class="detail-value package" [class.latest]="request.washPackage === 'Latest'" [class.basic]="request.washPackage !== 'Latest'"><i class="fas fa-box-open icon-sm"></i> {{ request.washPackage }}</p>
+        </div>
+        <div class="detail-group">
+          <p class="detail-label">LOCATION</p>
+          <p class="detail-value"><i class="fas fa-map-marker-alt icon-sm"></i> {{ request.location || 'N/A' }}</p>
+        </div>
+        <div class="detail-group">
+          <p class="detail-label">SCHEDULED TIME</p>
+          <p class="detail-value"><i class="fas fa-calendar-alt icon-sm"></i> {{ request.scheduledTime | date:'M/d/yy, h:mm a' }}</p>
+        </div>
+        <div class="detail-group">
+          <p class="detail-label">PAYMENT STATUS</p>
+          <p class="detail-value"><i class="fas fa-credit-card icon-sm"></i> {{ request.paymentStatus || 'N/A' }}</p>
+        </div>
+        <div class="detail-group">
+          <p class="detail-label">DESCRIPTION/NOTES</p>
+          <p class="detail-value"><i class="fas fa-clipboard icon-sm"></i> {{ request.notes || 'N/A' }}</p>
+        </div>
+      </div>
+      <div class="order-actions">
+        <button class="btn btn-primary" (click)="navigateToLocation(request.location)" [disabled]="!request.location"><i class="fas fa-map-marker-alt"></i> Navigate</button>
+        <button class="btn btn-secondary" (click)="acknowledgeBooking(request.id)" [disabled]="request.status !== 'ASSIGNED' || request.acknowledged">Acknowledge</button>
+        <button class="btn btn-success" (click)="acceptRequest(request.id)" [disabled]="!['PENDING', 'ASSIGNED'].includes(request.status) || loadingDecline[request.id] || loadingAccept[request.id]">
+          <span *ngIf="!loadingAccept[request.id]">Accept</span>
+          <mat-spinner diameter="20" *ngIf="loadingAccept[request.id]"></mat-spinner>
+        </button>
+        <button class="btn btn-danger" (click)="declineRequest(request.id)" [disabled]="!['PENDING', 'ASSIGNED'].includes(request.status) || loadingDecline[request.id]">
+          <span *ngIf="!loadingDecline[request.id]">Decline</span>
+          <mat-spinner diameter="20" *ngIf="loadingDecline[request.id]"></mat-spinner>
+        </button>
+      </div>
+    </section>
+    <p class="no-data" *ngIf="requests.length === 0">No pending requests available.</p>
+
+    <section class="section-title">
+      <h2>Current Orders</h2>
+    </section>
+    <section class="card order-card" *ngFor="let order of currentOrders">
+      <div class="status-badge accepted">ACCEPTED</div>
+      <div class="order-details-grid">
+        <div class="detail-group">
+          <p class="detail-label">ORDER ID</p>
+          <p class="detail-value">{{ order.id }}</p>
+        </div>
+        <div class="detail-group">
+          <p class="detail-label">USER NAME</p>
+          <p class="detail-value"><i class="fas fa-user icon-sm"></i> {{ order.userName || 'N/A' }}</p>
+        </div>
+        <div class="detail-group">
+          <p class="detail-label">CAR</p>
+          <p class="detail-value"><i class="fas fa-car icon-sm"></i> {{ order.carId }}</p>
+        </div>
+        <div class="detail-group">
+          <p class="detail-label">PACKAGE</p>
+          <p class="detail-value package" [class.latest]="order.washPackage === 'Latest'" [class.basic]="order.washPackage !== 'Latest'"><i class="fas fa-box-open icon-sm"></i> {{ order.washPackage }}</p>
+        </div>
+        <div class="detail-group">
+          <p class="detail-label">LOCATION</p>
+          <p class="detail-value"><i class="fas fa-map-marker-alt icon-sm"></i> {{ order.location || 'N/A' }}</p>
+        </div>
+        <div class="detail-group">
+          <p class="detail-label">SCHEDULED TIME</p>
+          <p class="detail-value"><i class="fas fa-calendar-alt icon-sm"></i> {{ order.scheduledTime | date:'M/d/yy, h:mm a' }}</p>
+        </div>
+        <div class="detail-group">
+          <p class="detail-label">PAYMENT STATUS</p>
+          <p class="detail-value"><i class="fas fa-credit-card icon-sm"></i> {{ order.paymentStatus || 'N/A' }}</p>
+        </div>
+        <div class="detail-group">
+          <p class="detail-label">DESCRIPTION/NOTES</p>
+          <p class="detail-value"><i class="fas fa-clipboard icon-sm"></i> {{ order.notes || 'N/A' }}</p>
+        </div>
+      </div>
+      <div class="order-actions">
+        <button class="btn btn-primary" (click)="navigateToLocation(order.location)" [disabled]="!order.location"><i class="fas fa-map-marker-alt"></i> Navigate</button>
+        <button class="btn btn-secondary-yellow" *ngIf="order.status === 'ACCEPTED'" (click)="startProcessing(order.id)" [disabled]="loadingStart[order.id]">
+          <span *ngIf="!loadingStart[order.id]"><i class="fas fa-play"></i> Start Processing</span>
+          <mat-spinner diameter="20" *ngIf="loadingStart[order.id]"></mat-spinner>
+        </button>
+        <button class="btn btn-secondary" *ngIf="order.status === 'PROCESSING'" (click)="completeRequest(order.id)">Complete</button>
+      </div>
+    </section>
+    <p class="no-data" *ngIf="currentOrders.length === 0">No current orders available.</p>
+
+    <section class="section-title">
+      <h2>Past Orders</h2>
+      <button class="btn btn-secondary" (click)="viewReviewsGiven()"><i class="fas fa-star"></i> View Reviews Given</button>
+    </section>
+    <section class="card order-card" *ngFor="let order of pastOrders">
+      <div class="status-badge" [class]="order.status.toLowerCase()">{{ order.status }}</div>
+      <div class="order-details-grid">
+        <div class="detail-group">
+          <p class="detail-label">{{ order.status === 'CANCELED' ? 'ORDER ID' : 'ORDER ID' }}</p>
+          <p class="detail-value">{{ order.id }}</p>
+        </div>
+        <div class="detail-group">
+          <p class="detail-label">USER NAME</p>
+          <p class="detail-value"><i class="fas fa-user icon-sm"></i> {{ order.userName || 'N/A' }}</p>
+        </div>
+        <div class="detail-group">
+          <p class="detail-label">CAR</p>
+          <p class="detail-value"><i class="fas fa-car icon-sm"></i> {{ order.carId }}</p>
+        </div>
+        <div class="detail-group">
+          <p class="detail-label">PACKAGE</p>
+          <p class="detail-value package" [class.latest]="order.washPackage === 'Latest'" [class.basic]="order.washPackage !== 'Latest'"><i class="fas fa-box-open icon-sm"></i> {{ order.washPackage }}</p>
+        </div>
+        <div class="detail-group">
+          <p class="detail-label">LOCATION</p>
+          <p class="detail-value"><i class="fas fa-map-marker-alt icon-sm"></i> {{ order.location || 'N/A' }}</p>
+        </div>
+        <div class="detail-group">
+          <p class="detail-label">SCHEDULED TIME</p>
+          <p class="detail-value"><i class="fas fa-calendar-alt icon-sm"></i> {{ order.scheduledTime ? (order.scheduledTime | date:'M/d/yy, h:mm a') : 'N/A' }}</p>
+        </div>
+        <div class="detail-group" *ngIf="order.status !== 'CANCELED'">
+          <p class="detail-label">PAYMENT STATUS</p>
+          <p class="detail-value"><i class="fas fa-credit-card icon-sm"></i> {{ order.paymentStatus || 'N/A' }}</p>
+        </div>
+        <div class="detail-group" *ngIf="order.status === 'CANCELED'">
+          <p class="detail-label">DESCRIPTION/NOTES</p>
+          <p class="detail-value"><i class="fas fa-clipboard icon-sm"></i> {{ order.notes || 'N/A' }}</p>
+        </div>
+      </div>
+      <div class="additional-info-grid" *ngIf="order.status === 'COMPLETED'">
+        <div class="detail-group">
+          <p class="detail-label">ADD-ONS</p>
+          <p class="detail-value">{{ order.notes || 'None' }}</p>
+        </div>
+        <div class="detail-group">
+          <p class="detail-label">TOTAL AMOUNT</p>
+          <p class="detail-value price-value">${{ order.totalAmount || 'N/A' }}</p>
+        </div>
+        <div class="detail-group full-width">
+          <p class="detail-label">TRANSACTION ID</p>
+          <p class="detail-value">{{ order.transactionId || 'N/A' }}</p>
+        </div>
+      </div>
+      <div class="upload-section" *ngIf="order.status === 'COMPLETED' && !order.receiptGenerated">
+        <p class="upload-label">Upload After-Wash Photos</p>
+        <input type="file" [id]="'afterWashPhotos' + order.id" (change)="onFileSelected($event, order)" accept="image/*" class="file-input">
+        <label [for]="'afterWashPhotos' + order.id" class="custom-file-upload">Choose File</label>
+        <span [id]="'file-name' + order.id" class="file-name">{{ selectedFileNames[order.id] || 'No file chosen' }}</span>
+      </div>
+      <div class="order-actions" *ngIf="order.status === 'COMPLETED'">
+        <button class="btn btn-secondary-yellow" *ngIf="!order.receiptGenerated" (click)="generateInvoice(order)" [disabled]="!selectedFiles[order.id]"><i class="fas fa-file-invoice"></i> Generate Invoice</button>
+        <button class="btn btn-secondary" *ngIf="order.receiptGenerated" disabled>Generated Successfully</button>
+        <button class="btn btn-secondary" *ngIf="!order.reviewId" (click)="leaveReview(order.id, order.userId)"><i class="fas fa-star"></i> Leave Review</button>
+      </div>
+    </section>
+    <p class="no-data" *ngIf="pastOrders.length === 0">No past orders available.</p>
+  </div>
+</div>

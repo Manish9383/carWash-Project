@@ -1,0 +1,20 @@
+<div class="payment-modal">
+    <h2 mat-dialog-title>Complete Your Payment</h2>
+    <mat-dialog-content>
+      <div class="payment-details">
+        <p><strong>Package:</strong> {{ data.washPackage | titlecase }} Wash</p>
+        <p><strong>Amount:</strong> ${{ data.amount }}</p>
+        <p><strong>Car Model:</strong> {{ data.carId }}</p>
+        <p><strong>Location:</strong> {{ data.location }}</p>
+        <p><strong>Scheduled Time:</strong> {{ data.scheduledTime | date:'medium' }}</p>
+      </div>
+      <div id="dropin-container" *ngIf="clientToken"></div>
+      <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+      <button mat-button (click)="onCancel()">Cancel</button>
+      <button mat-raised-button color="primary" (click)="makePayment()" [disabled]="loading">
+        {{ loading ? 'Processing...' : 'Pay Now' }}
+      </button>
+    </mat-dialog-actions>
+  </div>

@@ -1,0 +1,87 @@
+.receipt-container {
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.receipt-title {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.header-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+}
+
+.loading {
+  text-align: center;
+  margin: 20px 0;
+  font-size: 16px;
+  color: #555;
+}
+
+.error {
+  color: red;
+  text-align: center;
+  margin: 20px 0;
+  font-size: 16px;
+}
+
+.no-receipts {
+  text-align: center;
+  margin: 20px 0;
+  font-size: 16px;
+  color: #666;
+}
+
+.receipt-grid {
+  display: grid;
+  gap: 20px;
+}
+
+.receipt-card {
+  border: 1px solid #ddd;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.car-photo {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.receipt-details p {
+  margin: 5px 0;
+  font-size: 14px;
+}
+
+.receipt-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.action-btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.share-btn {
+  background-color: #007bff;
+  color: white;
+}
+
+.download-btn {
+  background-color: #28a745;
+  color: white;
+}

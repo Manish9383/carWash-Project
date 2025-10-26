@@ -1,0 +1,189 @@
+.truck-button {
+  --color: #fff;
+  --background: #2B3044;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #e0e7ff 0%, #f8fafc 100%);
+  padding: 40px 0;
+}
+
+.container {
+  width: 100%;
+  background: #fff;
+  padding: 32px 28px 28px 28px;
+  border-radius: 0;
+  box-shadow: none;
+  min-height: 100vh;
+}
+
+.header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #1e3a8a;
+  font-size: 2.1rem;
+  font-weight: 700;
+  margin-bottom: 0;
+}
+.head-icon {
+  font-size: 2.2rem;
+  color: #3b82f6;
+}
+
+.header-actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.loading {
+  text-align: center;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #007bff;
+}
+
+.error {
+  text-align: center;
+  color: red;
+  font-weight: bold;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.no-bookings {
+  text-align: center;
+  color: #888;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.booking-list {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  margin-top: 10px;
+}
+
+.booking-card {
+  background: linear-gradient(135deg, #f8fafc 60%, #e0e7ff 100%);
+  padding: 22px 22px 18px 22px;
+  border-radius: 16px;
+  box-shadow: 0 4px 18px rgba(59, 130, 246, 0.08);
+  border-left: 6px solid #3b82f6;
+  transition: transform 0.2s, box-shadow 0.2s;
+  position: relative;
+  &:hover {
+    transform: translateY(-2px) scale(1.015);
+    box-shadow: 0 8px 32px rgba(59, 130, 246, 0.13);
+  }
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  .car-id {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 1.1rem;
+    color: #1e293b;
+    font-weight: 600;
+  }
+}
+
+.status-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 18px;
+  font-size: 15px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  background: #e0e7ff;
+  color: #1e3a8a;
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.06);
+  &.pending { background: #fbbf24; color: #fff; }
+  &.assigned { background: #a78bfa; color: #fff; }
+  &.processing { background: #3b82f6; color: #fff; }
+  &.completed { background: #22c55e; color: #fff; }
+  &.cancelled { background: #ef4444; color: #fff; }
+}
+
+.card-body {
+  .info-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 6px 0;
+    font-size: 15px;
+    color: #1e293b;
+    strong { color: #1e3a8a; font-weight: 600; }
+    mat-icon { font-size: 20px; color: #3b82f6; }
+  }
+}
+
+.card-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.review-btn,
+.view-receipt-btn,
+.cancel-btn {
+  border: none;
+  padding: 10px 13px;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.review-btn,
+.view-receipt-btn {
+  background: linear-gradient(90deg, #3b82f6 60%, #2563eb 100%);
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.08);
+  &:hover {
+    background: linear-gradient(90deg, #2563eb 60%, #1e40af 100%);
+    transform: scale(1.05);
+  }
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+.cancel-btn {
+  background: linear-gradient(90deg, #ef4444 60%, #f87171 100%);
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(239, 68, 68, 0.08);
+  &:hover {
+    background: linear-gradient(90deg, #f87171 60%, #ef4444 100%);
+    transform: scale(1.05);
+  }
+  &:active {
+    transform: scale(0.95);
+  }
+}

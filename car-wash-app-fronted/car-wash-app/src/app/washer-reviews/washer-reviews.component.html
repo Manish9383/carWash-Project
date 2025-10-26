@@ -1,0 +1,57 @@
+<div class="review-container">
+  <header class="review-header">
+    <h2>Review Your Customer</h2>
+    <p class="subtitle">Provide feedback for this booking</p>
+  </header>
+
+  <section class="review-content">
+    <div *ngIf="loading" class="loading">
+      <mat-spinner diameter="40"></mat-spinner>
+      <span>Loading booking details...</span>
+    </div>
+
+    <div *ngIf="errorMessage" class="message error">
+      <mat-icon>error_outline</mat-icon>
+      <span>{{ errorMessage }}</span>
+    </div>
+
+    <div *ngIf="successMessage" class="message success">
+      <mat-icon>check_circle</mat-icon>
+      <span>{{ successMessage }}</span>
+    </div>
+
+    <div *ngIf="!loading && !errorMessage && !successMessage && booking" class="review-form-section">
+      <div class="booking-details">
+        <p><strong>Booking ID:</strong> {{ booking.id }}</p>
+        <p><strong>Customer ID:</strong> {{ booking.userId }}</p>
+      </div>
+
+      <form [formGroup]="reviewForm" (ngSubmit)="onSubmit()" class="review-form">
+        <div class="star-rating">
+          <mat-label>Rating</mat-label>
+          <div class="stars">
+            <mat-icon
+              *ngFor="let star of [1, 2, 3, 4, 5]; let i = index"
+              [ngClass]="{'filled': i < reviewForm.get('rating')?.value}"
+              (click)="setRating(i + 1)"
+            >
+              {{ i < reviewForm.get('rating')?.value ? 'star' : 'star_border' }}
+            </mat-icon>
+          </div>
+          <mat-error *ngIf="reviewForm.get('rating')?.hasError('required') && reviewForm.get('rating')?.touched">
+            Rating is required
+          </mat-error>
+        </div>
+
+        <mat-form-field appearance="outline" class="comment-field">
+          <mat-label>Comment (optional)</mat-label>
+          <textarea matInput formControlName="comment" rows="4" placeholder="Share your experience..."></textarea>
+        </mat-form-field>
+
+        <button mat-raised-button class="submit-button" type="submit" [disabled]="reviewForm.invalid">
+          Submit Review
+        </button>
+      </form>
+    </div>
+  </section>
+</div>

@@ -1,0 +1,43 @@
+<h2 mat-dialog-title>Edit Washer</h2>
+<mat-dialog-content>
+  <form [formGroup]="editWasherForm">
+    <mat-form-field appearance="fill">
+      <mat-label>Full Name</mat-label>
+      <input matInput formControlName="fullName" required />
+      <mat-error *ngIf="editWasherForm.get('fullName')?.hasError('required')">
+        Full Name is required
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" type="email" required />
+      <mat-error *ngIf="editWasherForm.get('email')?.hasError('required')">
+        Email is required
+      </mat-error>
+      <mat-error *ngIf="editWasherForm.get('email')?.hasError('email')">
+        Invalid email format
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Phone</mat-label>
+      <input matInput formControlName="phone" type="tel" />
+      <mat-error *ngIf="editWasherForm.get('phone')?.hasError('pattern')">
+        Invalid phone number (10 digits required)
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Service Status</mat-label>
+      <mat-select formControlName="serviceStatus">
+        <mat-option value="ONLINE">Online</mat-option>
+        <mat-option value="OFFLINE">Offline</mat-option>
+        <mat-option value="BUSY">Busy</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="closeDialog()">Cancel</button>
+  <button mat-raised-button color="primary" [disabled]="editWasherForm.invalid" (click)="saveWasher()">
+    Save
+  </button>
+</mat-dialog-actions>

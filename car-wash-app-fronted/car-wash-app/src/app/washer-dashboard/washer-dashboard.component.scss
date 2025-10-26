@@ -1,0 +1,452 @@
+/* Importing the 'Inter' font */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+/* Global Styles */
+:host ::ng-deep * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:host ::ng-deep body {
+    background-color: var(--bg-color);
+    color: var(--primary-text);
+    font-family: var(--font-family);
+    padding: 40px 20px;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 30px; /* Spacing between sections */
+}
+
+/* Typography */
+.dashboard-header {
+    margin-bottom: 20px;
+}
+
+.main-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--primary-text);
+    margin-bottom: 5px;
+}
+
+.subtitle {
+    font-size: 1.1rem;
+    color: var(--secondary-text);
+}
+
+.section-title {
+    margin-top: 20px;
+    margin-bottom: 15px;
+}
+
+.section-title h2 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--primary-text);
+}
+
+/* Cards General Style */
+.card {
+    background-color: var(--card-bg);
+    padding: 25px;
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* Service Status Card */
+.service-status-card {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.service-status-card .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.service-status-card h3 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--primary-text);
+}
+
+.status-text {
+    font-size: 1rem;
+    color: var(--secondary-text);
+}
+
+.status-text #onlineStatus {
+    font-weight: 600;
+    color: var(--completed-color); /* Green for ONLINE */
+}
+
+.status-text #onlineStatus.offline {
+    color: red; /* Red for OFFLINE */
+}
+
+/* Toggle Switch */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked + .slider {
+    background-color: var(--accent-color);
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px var(--accent-color);
+}
+
+input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+/* Today's Report Stats Grid */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.stat-card {
+    background-color: var(--card-bg);
+    padding: 20px;
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Align text to the left */
+    gap: 10px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(255, 153, 0, 0.2); /* Subtle accent glow */
+}
+
+.stat-card .icon-lg {
+    font-size: 2rem;
+    color: var(--accent-color);
+    margin-bottom: 5px;
+}
+
+.stat-card p {
+    font-size: 0.9rem;
+    color: var(--secondary-text);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.stat-card h2.stat-value {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--primary-text);
+}
+
+/* Order Cards (Pending, Current, Past) */
+.order-card {
+    position: relative;
+    padding: 25px;
+    padding-top: 45px; /* Space for the badge */
+}
+
+.status-badge {
+    position: absolute;
+    top: 15px;
+    left: 25px;
+    padding: 6px 15px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: white;
+}
+
+.status-badge.pending { background-color: var(--pending-color); }
+.status-badge.accepted { background-color: var(--accepted-color); }
+.status-badge.completed { background-color: var(--completed-color); }
+.status-badge.canceled { background-color: var(--canceled-color); }
+
+.order-details-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px 30px;
+    margin-bottom: 25px;
+}
+
+.additional-info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px 30px;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255,255,255,0.05); /* Subtle separator */
+}
+
+.detail-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.detail-label {
+    font-size: 0.8rem;
+    color: var(--secondary-text);
+    text-transform: uppercase;
+    margin-bottom: 5px;
+    letter-spacing: 0.5px;
+}
+
+.detail-value {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--primary-text);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.detail-value .icon-sm {
+    font-size: 1rem;
+    color: var(--secondary-text);
+}
+
+.package {
+    font-weight: 600;
+}
+.package.latest { color: var(--accent-color); } /* Yellow for 'Latest' */
+.package.basic { color: var(--secondary-text); } /* Gray for 'Basic' */
+
+.price-value {
+    color: var(--accent-color);
+    font-weight: 700;
+}
+
+.full-width {
+    grid-column: 1 / -1; /* Make it span all columns */
+}
+
+/* Buttons */
+.order-actions {
+    display: flex;
+    flex-wrap: wrap; /* Allow buttons to wrap */
+    gap: 15px;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255,255,255,0.05); /* Subtle separator */
+}
+
+.btn {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    text-decoration: none; /* For potential anchor buttons */
+    color: var(--primary-text); /* Default button text color */
+}
+
+.btn-primary {
+    background-color: var(--accepted-color); /* Blue for Navigate */
+}
+.btn-primary:hover {
+    background-color: #5C6BC0;
+    transform: translateY(-2px);
+}
+
+.btn-secondary {
+    background-color: var(--btn-secondary-bg); /* Gray */
+}
+.btn-secondary:hover {
+    background-color: var(--btn-secondary-hover);
+    transform: translateY(-2px);
+}
+
+.btn-secondary-yellow {
+    background-color: var(--accent-color); /* Yellow */
+    color: #1a1a1a; /* Dark text for yellow button */
+}
+.btn-secondary-yellow:hover {
+    background-color: var(--accent-color-hover);
+    transform: translateY(-2px);
+}
+
+.btn-success {
+    background-color: var(--success-color); /* Green for Accept */
+}
+.btn-success:hover {
+    background-color: #81C784;
+    transform: translateY(-2px);
+}
+
+.btn-danger {
+    background-color: var(--danger-color); /* Red for Decline */
+}
+.btn-danger:hover {
+    background-color: #E57373;
+    transform: translateY(-2px);
+}
+
+/* File Upload Section (Completed Order) */
+.upload-section {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 15px;
+}
+
+.upload-label {
+    font-size: 0.9rem;
+    color: var(--secondary-text);
+    margin-right: 10px;
+}
+
+.file-input {
+    display: none; /* Hide default input */
+}
+
+.custom-file-upload {
+    background-color: var(--btn-secondary-bg);
+    color: var(--primary-text);
+    padding: 8px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.2s ease;
+}
+
+.custom-file-upload:hover {
+    background-color: var(--btn-secondary-hover);
+}
+
+.file-name {
+    font-size: 0.9rem;
+    color: var(--secondary-text);
+    margin-left: 5px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .container {
+        padding: 20px 15px;
+        gap: 25px;
+    }
+
+    .main-title {
+        font-size: 2rem;
+    }
+
+    .subtitle {
+        font-size: 0.95rem;
+    }
+
+    .section-title h2 {
+        font-size: 1.5rem;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr; /* Stack stats on smaller screens */
+        gap: 15px;
+    }
+
+    .stat-card {
+        padding: 15px;
+    }
+
+    .stat-card h2.stat-value {
+        font-size: 1.5rem;
+    }
+
+    .order-details-grid {
+        grid-template-columns: 1fr; /* Stack details on smaller screens */
+        gap: 15px;
+    }
+
+    .additional-info-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .order-actions {
+        flex-direction: column; /* Stack buttons */
+        gap: 10px;
+    }
+
+    .btn {
+        width: 100%; /* Full width buttons */
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .dashboard-header {
+        text-align: center;
+    }
+}

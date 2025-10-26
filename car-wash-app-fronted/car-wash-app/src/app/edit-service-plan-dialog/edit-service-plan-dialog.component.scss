@@ -1,0 +1,73 @@
+$primary: #0078d4; // Azure blue
+$background: #f5f7fa;
+$card-bg: #ffffff;
+$text-primary: #333333;
+$warn: #d13438;
+
+.dialog-content {
+  padding: 20px;
+  background: $card-bg;
+  max-width: 400px;
+  margin: 0 auto;
+
+  h2 {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: $text-primary;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .full-width {
+    width: 100%;
+    margin-bottom: 15px;
+  }
+
+  mat-form-field {
+    width: 100%;
+  }
+
+  .mat-error {
+    color: $warn;
+    font-size: 12px;
+  }
+}
+
+.dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+
+  button {
+    padding: 8px 16px;
+  }
+
+  .mat-raised-button {
+    background: $primary;
+    color: white;
+  }
+
+  .mat-button {
+    color: $text-primary;
+  }
+}
+
+@media (max-width: 600px) {
+  .dialog-content {
+    padding: 15px;
+
+    h2 {
+      font-size: 1.25rem;
+    }
+  }
+
+  .dialog-actions {
+    flex-direction: column;
+    gap: 8px;
+
+    button {
+      width: 100%;
+    }
+  }
+}

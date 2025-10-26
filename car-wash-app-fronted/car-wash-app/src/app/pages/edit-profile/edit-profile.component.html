@@ -1,0 +1,64 @@
+<div class="edit-profile-container">
+  <header class="profile-header">
+    <h2>Edit Profile</h2>
+    <div class="profile-avatar">
+  <img [src]="previewImage || user.profilePicture || 'assets/profile-placeholder.png'" alt="Profile Picture" />
+      <input type="file" accept="image/*" (change)="onFileChange($event)" class="avatar-upload" #fileInput hidden />
+      <button mat-icon-button class="upload-button" (click)="fileInput.click()" matTooltip="Upload Image">
+        <mat-icon>camera_alt</mat-icon>
+      </button>
+    </div>
+  </header>
+
+  <section class="edit-form-section">
+    <div *ngIf="loading" class="loading">
+      <mat-spinner diameter="40"></mat-spinner>
+      <span>Loading profile...</span>
+    </div>
+
+    <div *ngIf="errorMessage" class="error-message">
+      <mat-icon>error_outline</mat-icon>
+      <span>{{ errorMessage }}</span>
+    </div>
+
+    <div *ngIf="successMessage" class="success-message">
+      <mat-icon>check_circle</mat-icon>
+      <span>{{ successMessage }}</span>
+    </div>
+
+    <form [formGroup]="editForm" (ngSubmit)="onSubmit()" class="edit-form" *ngIf="!loading && !errorMessage">
+      <mat-form-field appearance="outline" class="avatar-url-field">
+        <mat-label>Profile Picture URL</mat-label>
+        <input matInput formControlName="profilePicture" (input)="onUrlChange($event)" placeholder="Paste image URL">
+        <mat-hint>Paste a URL or upload an image</mat-hint>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Full Name</mat-label>
+        <input matInput formControlName="fullName" required>
+        <mat-error *ngIf="editForm.get('fullName')?.hasError('required')">Full Name is required</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" type="email" required>
+        <mat-error *ngIf="editForm.get('email')?.hasError('required')">Email is required</mat-error>
+        <mat-error *ngIf="editForm.get('email')?.hasError('email')">Invalid email format</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Phone</mat-label>
+        <input matInput formControlName="phone" type="tel">
+      </mat-form-field>
+
+      <div class="form-actions">
+        <button mat-raised-button class="save-button" type="submit" [disabled]="editForm.invalid || !editForm.dirty">
+          Save Changes
+        </button>
+        <button mat-raised-button class="cancel-button" type="button" (click)="goBack()">
+          Cancel
+        </button>
+      </div>
+    </form>
+  </section>
+</div>

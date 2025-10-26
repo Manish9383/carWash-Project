@@ -1,0 +1,1538 @@
+// Add New Add-On Dialog Styles
+.add-on-dialog-container {
+  background: #fff;
+  border-radius: 44px;
+  box-shadow: 0 8px 32px rgba(25, 118, 210, 0.13), 0 2px 8px rgba(44, 62, 80, 0.10);
+  padding: 36px 28px 28px 28px;
+  max-width: 420px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.dialog-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1976d2;
+  margin-bottom: 24px;
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+.add-on-dialog-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+
+}
+
+.dialog-field {
+  width: 100%;
+}
+
+.dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+@media (max-width: 600px) {
+  .add-on-dialog-container {
+    padding: 18px 8px 14px 8px;
+    max-width: 98vw;
+  border-radius: 44px;
+
+  }
+  .dialog-title {
+    font-size: 1.1rem;
+  }
+}
+// Enhanced Promo Codes Card Grid Styles
+.promo-codes-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 36px;
+  margin-top: 36px;
+  margin-bottom: 36px;
+}
+
+.promo-code-card {
+  background: linear-gradient(135deg, #f8fafc 60%, #e3f0ff 100%);
+  border-radius: 20px;
+  box-shadow: 0 6px 32px rgba(25, 118, 210, 0.10), 0 2px 8px rgba(44, 62, 80, 0.08);
+  padding: 32px 28px 22px 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  position: relative;
+  transition: box-shadow 0.2s, transform 0.2s;
+  min-height: 200px;
+  border: 1.5px solid #e3eafc;
+}
+
+.promo-code-card:hover {
+  box-shadow: 0 12px 40px rgba(25, 118, 210, 0.18), 0 4px 16px rgba(44, 62, 80, 0.13);
+  transform: translateY(-3px) scale(1.015);
+}
+
+.promo-code-card-header {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.promo-code-icon {
+  color: #1976d2;
+  font-size: 36px;
+  margin-right: 16px;
+  background: linear-gradient(135deg, #1976d2 60%, #64b5f6 100%);
+  border-radius: 50%;
+  padding: 8px;
+  box-shadow: 0 2px 8px rgba(25, 118, 210, 0.10);
+}
+
+.promo-code-code {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #1a237e;
+  letter-spacing: 1px;
+  flex: 1;
+}
+
+.promo-code-status {
+  display: flex;
+  align-items: center;
+  font-size: 1.05rem;
+  font-weight: 600;
+  border-radius: 14px;
+  padding: 4px 16px 4px 8px;
+  margin-left: 10px;
+  background: #e3f2fd;
+  color: #1976d2;
+  gap: 6px;
+  box-shadow: 0 1px 4px rgba(25, 118, 210, 0.08);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.promo-code-status.active {
+  background: linear-gradient(90deg, #e8f5e9 70%, #b9f6ca 100%);
+  color: #2e7d32;
+  border: 1.5px solid #43a047;
+}
+.promo-code-status.inactive {
+  background: linear-gradient(90deg, #ffebee 70%, #ffcdd2 100%);
+  color: #c62828;
+  border: 1.5px solid #e53935;
+}
+
+.promo-code-card-body {
+  font-size: 1.13rem;
+  color: #1976d2;
+  margin-bottom: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+
+.promo-code-discount {
+  color: #d84315; /* Deep orange for discount info */
+  font-weight: 600;
+}
+.promo-code-discount mat-icon {
+  color: #ff9800;
+  font-size: 22px;
+  margin-right: 4px;
+}
+
+.promo-code-expiry {
+  color: #1565c0; /* Blue for expiry info */
+  font-weight: 600;
+}
+.promo-code-expiry mat-icon {
+  color: #1976d2;
+  font-size: 22px;
+  margin-right: 4px;
+}
+
+.promo-code-uses {
+  color: #2e7d32; /* Green for uses info */
+  font-weight: 600;
+}
+.promo-code-uses mat-icon {
+  color: #43a047;
+  font-size: 22px;
+  margin-right: 4px;
+}
+
+.promo-code-card-actions {
+  display: flex;
+  gap: 14px;
+  margin-top: auto;
+}
+.promo-code-card-actions button[mat-icon-button] {
+  background: #f5faff;
+  border-radius: 50%;
+  transition: background 0.2s;
+}
+.promo-code-card-actions button[mat-icon-button]:hover {
+  background: #e3f2fd;
+}
+// Promo Codes Card Grid Modern Styles
+.promo-codes-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 32px;
+  margin-top: 32px;
+  margin-bottom: 32px;
+}
+
+.promo-code-card {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 4px 24px rgba(25, 118, 210, 0.08), 0 1.5px 6px rgba(44, 62, 80, 0.06);
+  padding: 28px 24px 20px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  position: relative;
+  transition: box-shadow 0.2s, transform 0.2s;
+  min-height: 180px;
+}
+
+.promo-code-card:hover {
+  box-shadow: 0 8px 32px rgba(25, 118, 210, 0.16), 0 3px 12px rgba(44, 62, 80, 0.10);
+  transform: translateY(-2px) scale(1.01);
+}
+
+.promo-code-card-header {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 12px;
+}
+
+.promo-code-icon {
+  color: #1976d2;
+  font-size: 32px;
+  margin-right: 12px;
+}
+
+.promo-code-code {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #2c3e50;
+  flex: 1;
+}
+
+.promo-code-status {
+  display: flex;
+  align-items: center;
+  font-size: 0.95rem;
+  font-weight: 500;
+  border-radius: 12px;
+  padding: 2px 12px 2px 6px;
+  margin-left: 8px;
+  background: #e3f2fd;
+  color: #1976d2;
+  gap: 4px;
+}
+.promo-code-status.active {
+  background: #e8f5e9;
+  color: #388e3c;
+}
+.promo-code-status.inactive {
+  background: #ffebee;
+  color: #d32f2f;
+}
+
+.promo-code-card-body {
+  font-size: 1.1rem;
+  color: #1976d2;
+  margin-bottom: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.promo-code-discount mat-icon,
+.promo-code-expiry mat-icon,
+.promo-code-uses mat-icon {
+  font-size: 20px;
+  margin-right: 2px;
+}
+
+.promo-code-card-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: auto;
+}
+
+@media (max-width: 600px) {
+  .promo-codes-card-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+  .promo-code-card {
+    padding: 18px 10px 14px 10px;
+  }
+  .promo-code-card-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+}
+// Service Plans Card Grid Modern Styles
+.service-plans-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 32px;
+  margin-top: 32px;
+  margin-bottom: 32px;
+}
+
+.service-plan-card {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 4px 24px rgba(25, 118, 210, 0.08), 0 1.5px 6px rgba(44, 62, 80, 0.06);
+  padding: 28px 24px 20px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  position: relative;
+  transition: box-shadow 0.2s, transform 0.2s;
+  min-height: 180px;
+}
+
+.service-plan-card:hover {
+  box-shadow: 0 8px 32px rgba(25, 118, 210, 0.16), 0 3px 12px rgba(44, 62, 80, 0.10);
+  transform: translateY(-2px) scale(1.01);
+}
+
+.service-plan-card-header {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 12px;
+}
+
+.service-plan-icon {
+  color: #1976d2;
+  font-size: 32px;
+  margin-right: 12px;
+}
+
+.service-plan-name {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #2c3e50;
+  flex: 1;
+}
+
+.service-plan-status {
+  display: flex;
+  align-items: center;
+  font-size: 0.95rem;
+  font-weight: 500;
+  border-radius: 12px;
+  padding: 2px 12px 2px 6px;
+  margin-left: 8px;
+  background: #e3f2fd;
+  color: #1976d2;
+  gap: 4px;
+}
+.service-plan-status.active {
+  background: #e8f5e9;
+  color: #388e3c;
+}
+.service-plan-status.inactive {
+  background: #ffebee;
+  color: #d32f2f;
+}
+
+.service-plan-card-body {
+  font-size: 1.1rem;
+  color: #1976d2;
+  margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.service-plan-price mat-icon {
+  font-size: 20px;
+  margin-right: 2px;
+}
+
+.service-plan-card-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: auto;
+}
+
+@media (max-width: 600px) {
+  .service-plans-card-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+  .service-plan-card {
+    padding: 18px 10px 14px 10px;
+  }
+  .service-plan-card-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+}
+
+/* Orders: toolbar, filters, and assign panel styles */
+.orders-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 8px;
+  margin-bottom: 12px;
+  border-radius: 12px;
+  background: linear-gradient(90deg, rgba(245,248,252,0.6), rgba(241,246,255,0.4));
+}
+/* ---------------------------------------------------------------------
+  Assign panel sizing variables
+  Change these values to adjust the Assign Washer panel dimensions.
+  - $assign-panel-width: panel width when open (desktop)
+  - $assign-panel-top-offset: distance from top of viewport when panel is shown
+  - $assign-panel-height-offset: value subtracted from 100vh to compute panel height
+  - $assign-panel-padding: panel inner padding
+  - $assign-panel-open-right: right offset when panel is visible
+  - $assign-washers-table-vspace: amount subtracted from 100vh to size the table area
+  Example: set $assign-panel-width: 460px; to make panel slightly smaller
+--------------------------------------------------------------------- */
+$assign-panel-width: 940px; // slightly larger width for more comfortable layout
+$assign-panel-top-offset: 48px; // bring panel a bit closer to top
+$assign-panel-height-offset: 80px; // reduce offset so panel is taller
+$assign-panel-padding: 20px; // slightly more padding inside panel
+$assign-panel-open-right: 28px; // keep a visible inset from right edge
+$assign-washers-table-vspace: 220px; // slightly smaller subtraction so table has more vertical space
+
+.orders-toolbar h4 { margin: 0; font-size: 1.1rem; font-weight: 600; }
+.orders-toolbar .table-search { width: 320px; max-width: 40vw; }
+.orders-toolbar .toolbar-right { display:flex; gap:12px; align-items:center }
+
+.filter-panel { margin-bottom: 16px; padding: 12px; border-radius: 12px; background: #fff; box-shadow: 0 6px 18px rgba(2,6,23,0.04); display:flex; }
+.filter-form { display:flex; gap:12px; flex-wrap:wrap; width:100%; }
+.filter-form mat-form-field { width: 220px; min-width: 160px; }
+
+.assign-panel {
+  position: fixed;
+  /* off-canvas to the right by panel width; uses variables defined above for easy tuning */
+  right: -#{$assign-panel-width};
+  top: $assign-panel-top-offset;
+  width: $assign-panel-width;
+  max-width: 95vw;
+  height: calc(100vh - #{$assign-panel-height-offset});
+  background: #fff;
+  box-shadow: 0 18px 48px rgba(2,6,23,0.14);
+  border-radius: 12px 0 0 12px;
+  transition: right 260ms ease-in-out, opacity 220ms, transform 220ms;
+  opacity: 0;
+  z-index: 1350; /* lower than overlay */
+  display:flex; flex-direction:column; padding: $assign-panel-padding;
+}
+.assign-panel.open {
+  /* when opened, keep the panel slightly inset from the right/top so it appears as a focused panel
+     Change $assign-panel-open-right and $assign-panel-top-offset to tweak how inset it is */
+  left: auto;
+  right: $assign-panel-open-right;
+  top: $assign-panel-top-offset;
+  bottom: auto;
+  width: $assign-panel-width;
+  height: calc(100vh - #{$assign-panel-height-offset});
+  border-radius: 12px;
+  padding: $assign-panel-padding;
+  opacity: 1;
+  z-index: 2100;
+}
+.assign-panel-header { display:flex; justify-content:space-between; align-items:center; padding-bottom:8px; border-bottom:1px solid rgba(0,0,0,0.06); }
+.assign-panel-body { padding-top:12px; overflow:auto; display:flex; flex-direction:column; }
+.assign-form .full-width { width:100%; }
+.assign-actions { display:flex; justify-content:flex-end; gap:10px; margin-top:12px; }
+
+.selected-booking p { margin:4px 0; font-size:0.95rem; color:#34495e }
+
+/* Table tweaks for alignment and responsive rows */
+.mat-table { width:100%; overflow:auto; }
+mat-header-cell, mat-cell { padding: 12px 8px; }
+
+@media (max-width: 900px) {
+  .orders-toolbar .table-search { width: 180px; }
+  .filter-form mat-form-field { width: 100%; }
+  .assign-panel { width: 100%; right: -100%; border-radius: 12px 12px 0 0; }
+  .assign-panel.open { right: 0; top: auto; bottom: 0; height: calc(100vh - #{$assign-panel-height-offset}); }
+}
+
+/* Snackbar styles */
+.snackbar-success {
+  background: linear-gradient(90deg, #2e7d32, #43a047) !important;
+  color: #fff !important;
+}
+
+/* Ensure select overlays for washers appear above the assign panel */
+.washer-overlay-panel {
+  z-index: 2000 !important;
+}
+
+.washer-list { margin-top: 12px; border-top: 1px solid rgba(0,0,0,0.06); padding-top: 8px; max-height: 260px; overflow:auto }
+.washer-list-title { font-weight:600; margin-bottom:6px; color:#2c3e50 }
+.washer-item { margin-bottom:6px }
+.washer-button { display:flex; align-items:center; justify-content:space-between; width:100%; text-transform:none }
+.washer-button .washer-name { flex:1; margin-left:8px }
+.washer-status.online { color: #2e7d32; font-weight:600 }
+.washer-status.offline { color:#d32f2f }
+.washer-select-check { color:#1976d2 }
+/* Inline dropdown styles for assign washer control */
+.assign-washer-control { position: relative; margin-top: 10px; }
+.assign-washer-label { display:block; font-weight:600; margin-bottom:6px; color:#2c3e50 }
+.assign-washer-input { display:flex; align-items:center; justify-content:space-between; padding:10px 12px; border-radius:8px; background:#fafafa; border:1px solid #eef3fb; cursor:pointer }
+.assign-washer-input.disabled { opacity:0.6; cursor:not-allowed }
+.assign-washer-input .selected-washer { color:#233140; font-weight:500 }
+.assign-washer-input .chev { background:transparent; border:none; font-size:14px; cursor:pointer }
+.assign-washer-dropdown { position: absolute; left: 0; right: 0; top: calc(100% + 8px); background: #fff; border-radius: 10px; box-shadow: 0 12px 30px rgba(2,6,23,0.12); z-index: 1400; max-height: 320px; overflow:auto; border:1px solid #eef3fb }
+.assign-washer-dropdown .dropdown-search { padding:8px; border-bottom:1px solid #f1f5f9 }
+.assign-washer-dropdown .dropdown-search input { width:100%; padding:8px; border-radius:6px; border:1px solid #e6eefc }
+.assign-washer-dropdown .dropdown-list { padding:8px }
+.assign-washer-dropdown .dropdown-item { display:flex; align-items:center; justify-content:space-between; padding:10px; border-radius:8px; cursor:pointer }
+.assign-washer-dropdown .dropdown-item:hover { background:#f4f9ff }
+.assign-washer-dropdown .dropdown-item.disabled { opacity:0.5; cursor:not-allowed }
+.assign-washer-dropdown .item-left { display:flex; gap:10px; align-items:center }
+.assign-washer-dropdown .status-icon { color:#1976d2 }
+.assign-washer-dropdown .item-info .item-name { font-weight:600 }
+.assign-washer-dropdown .item-info .item-meta { font-size:0.85rem; color:#7b8aa3 }
+.assign-washer-dropdown .washer-select-check { color:#1976d2 }
+
+/* Washers table styles */
+.washers-table-wrapper { margin-top: 18px; }
+.washers-table { width:100%; border-collapse: collapse; }
+.washers-table th.mat-header-cell { background: linear-gradient(90deg, #f5f9ff, #ffffff); font-weight:700; color:#123; padding:12px 16px; text-align:left }
+.washers-table td.mat-cell { padding:12px 16px; vertical-align: middle }
+.washer-avatar { display:flex; align-items:center; justify-content:center; width:44px; height:44px; border-radius:50%; overflow:hidden; background:#f1f6fb }
+.washer-avatar-img { width:44px; height:44px; object-fit:cover }
+.col-icon { font-size:16px; vertical-align:middle; margin-right:6px; color:#1976d2 }
+.washer-status-badge { padding:6px 10px; border-radius:12px; font-weight:600; font-size:0.9rem }
+.washer-status-badge.online { background: #e6f4ea; color:#2e7d32; border:1px solid #c8f0d0 }
+.washer-status-badge.offline { background: #fff0f0; color:#c62828; border:1px solid #ffd6d6 }
+.washer-actions button { margin-right:6px }
+.washers-table tr.mat-row:hover { background:#f8fbff }
+
+@media (max-width: 900px) {
+  .washers-table thead { display:none }
+  .washers-table tr.mat-row { display:block; margin-bottom:12px; border-radius:8px; background:#fff }
+  .washers-table td.mat-cell { display:flex; justify-content:space-between; padding:10px }
+  .washers-table td.mat-cell::before { content: attr(data-label); font-weight:600; color:#556 }
+}
+
+/* Responsive assign panel adjustments */
+@media (max-width: 600px) {
+  /* For very small screens, use almost full-width and reduced height so the panel behaves like a bottom sheet */
+  .assign-panel { width: 92vw; right: -100%; border-radius: 12px 12px 0 0 }
+  .assign-panel.open { right: 0; top: auto; bottom: 0; height: calc(100vh - #{$assign-panel-height-offset}); }
+}
+
+@media (max-width: 600px) {
+  .assign-washer-search { width:140px }
+  .assign-washers-table { display:block }
+  .assign-washers-table thead { display:none }
+  .assign-washers-table tbody, .assign-washers-table tr { display:block }
+  .assign-washers-table td { display:flex; justify-content:space-between; padding:10px 12px }
+}
+
+/* Assign panel washers table */
+.assign-washers-table-wrapper { margin-top: 12px; display:flex; flex-direction:column; flex:1; }
+.assign-washers-header { display:flex; justify-content:space-between; align-items:center; gap:12px; margin-bottom:8px }
+.assign-washer-search { width:220px }
+.assign-washers-table { width:100%; border-collapse:collapse; overflow:auto; display:block; max-height: calc(100vh - #{$assign-washers-table-vspace}); }
+.assign-washers-table thead, .assign-washers-table tbody { display:table; width:100% }
+.assign-washers-table tr { display:table-row }
+.assign-washers-table td, .assign-washers-table th { padding:10px 12px }
+.assign-washers-table td { vertical-align:middle }
+.assign-washers-table .washer-avatar { width:40px; height:40px; border-radius:50%; overflow:hidden; display:inline-flex; align-items:center; justify-content:center; background:#f1f6fb }
+.assign-washers-table .washer-avatar-img { width:40px; height:40px; object-fit:cover }
+.assign-washers-table .washer-status-badge { padding:6px 8px; border-radius:12px }
+.assign-washers-table .no-washers { padding:12px; color:#666 }
+
+@media (max-width: 600px) {
+  .assign-washer-search { width:140px }
+  .assign-washers-table { display:block }
+  .assign-washers-table thead { display:none }
+  .assign-washers-table tbody, .assign-washers-table tr { display:block }
+  .assign-washers-table td { display:flex; justify-content:space-between; padding:10px 12px }
+}
+// Modern Add-Ons Card Grid Styles
+.add-ons-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  gap: 24px;
+  margin: 32px 0 18px 0;
+}
+
+.add-on-card {
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 2px 12px rgba(44, 62, 80, 0.09);
+  display: flex;
+  flex-direction: column;
+  padding: 22px 20px 16px 20px;
+  position: relative;
+  transition: box-shadow 0.2s;
+  min-height: 170px;
+  &:hover {
+    box-shadow: 0 6px 24px rgba(25, 118, 210, 0.13);
+    transform: translateY(-2px);
+  }
+}
+
+.add-on-card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+.add-on-icon {
+  font-size: 2.1rem;
+  color: #1976d2;
+  background: #e3eaf2;
+  border-radius: 50%;
+  padding: 8px;
+}
+.add-on-name {
+  font-size: 1.18rem;
+  font-weight: 600;
+  color: #232946;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.add-on-status {
+  display: flex;
+  align-items: center;
+  font-size: 0.98rem;
+  font-weight: 500;
+  border-radius: 12px;
+  padding: 3px 12px 3px 6px;
+  gap: 4px;
+  &.active {
+    background: #e8f5e9;
+    color: #43a047;
+  }
+  &.inactive {
+    background: #ffebee;
+    color: #e74c3c;
+  }
+  mat-icon {
+    font-size: 1.1rem;
+    margin-right: 2px;
+  }
+}
+.add-on-card-body {
+  margin-bottom: 14px;
+  font-size: 1.08rem;
+  color: #2c3e50;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.add-on-price {
+  font-weight: 600;
+  color: #1976d2;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+.add-on-card-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  margin-top: auto;
+}
+.snackbar-success {
+  background: #43a047 !important;
+  color: #fff !important;
+  font-weight: 700;
+  font-size: 1.15rem;
+  letter-spacing: 0.5px;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(44, 62, 80, 0.25);
+  border: 2px solid #fff;
+  z-index: 9999 !important;
+  text-align: center;
+  padding: 18px 32px !important;
+}
+// Customers Tab Modern Styles
+.customers-tab {
+  .customers-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 18px;
+    gap: 12px;
+  }
+  .add-customer-btn {
+    font-weight: 600;
+    border-radius: 8px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.95) 70%, #e3f0ff 100%);
+  border-radius: 28px;
+  box-shadow: 0 12px 48px 0 rgba(25, 118, 210, 0.18), 0 2px 12px rgba(44, 62, 80, 0.13);
+  padding: 40px 32px 32px 32px;
+  max-width: 440px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  border: 1.5px solid #e3eafc;
+  backdrop-filter: blur(8px);
+  transition: box-shadow 0.2s, transform 0.2s;
+  }
+  .customers-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    margin-bottom: 18px;
+  }
+  .customers-table {
+    min-width: 700px;
+    width: 100%;
+    border-radius: 12px;
+    background: #fff;
+    box-shadow: 0 2px 12px rgba(44, 62, 80, 0.07);
+    overflow: hidden;
+  }
+  .customers-table-header {
+    display: flex;
+    align-items: center;
+    background: #f4f6fb;
+    font-weight: 600;
+    font-size: 1.04rem;
+    color: #232946;
+    padding: 0 18px;
+    height: 48px;
+    border-bottom: 1px solid #e3eaf2;
+  }
+  .customers-table-row {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #f0f0f0;
+    padding: 0 18px;
+    min-height: 56px;
+    transition: background 0.13s;
+    &:hover {
+      background: #f7fafd;
+    }
+  }
+  .customers-table-col {
+    display: flex;
+    align-items: center;
+    padding: 8px 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .avatar-col { width: 48px; justify-content: center; }
+  .name-col { flex: 1.2; min-width: 120px; }
+  .email-col { flex: 1.5; min-width: 160px; }
+  .phone-col { flex: 1; min-width: 110px; }
+  .status-col { flex: 0.9; min-width: 90px; }
+  .actions-col { flex: 0.9; min-width: 110px; justify-content: flex-end; gap: 6px; }
+  .customer-avatar-list {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #e3eaf2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: #232946;
+    overflow: hidden;
+  }
+  .customer-avatar-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    display: block;
+  }
+  .customer-table-text {
+    color: #232946;
+  }
+  .customer-status-list {
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.97rem;
+    font-weight: 500;
+    margin-left: 8px;
+    border-radius: 6px;
+    padding: 2px 10px;
+    background: #f3f6fa;
+    color: #3b7c3b;
+    &.inactive {
+      color: #b91c1c;
+      background: #fbeaea;
+    }
+  }
+  .customer-row-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+    gap: 4px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    border-radius: 6px;
+    padding: 2px 10px 2px 6px;
+    background: #e3eaf2;
+    color: #388e3c;
+    &.inactive {
+      background: #ffebee;
+      color: #d32f2f;
+    }
+    &.active {
+      background: #e8f5e9;
+      color: #388e3c;
+    }
+  }
+  .customer-actions {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    margin-top: 6px;
+  }
+  .no-customers {
+    text-align: center;
+    color: #888;
+    font-size: 1.1rem;
+    margin-top: 32px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    justify-content: center;
+  }
+// Modern Admin Dashboard Layout
+.admin-dashboard-layout {
+  display: flex;
+  min-height: 100vh;
+  background: #f4f6fb;
+}
+
+.sidebar {
+  width: 240px;
+  background: #101012;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  box-shadow: 2px 0 12px rgba(44, 62, 80, 0.07);
+  z-index: 10;
+  transition: width 0.2s;
+}
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 20px 16px 20px;
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+.logo {
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.4rem;
+  letter-spacing: 2px;
+}
+.dark-toggle {
+  color: #fff;
+}
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 0 8px;
+}
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 18px;
+  border: none;
+  background: none;
+  color: #fff;
+  font-size: 1.08rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  font-weight: 500;
+}
+.nav-item.active, .nav-item:hover {
+  background: #394867;
+  color: #f7ca18;
+}
+.nav-item mat-icon {
+  font-size: 1.5rem;
+}
+
+// Main content area
+.main-content {
+  flex: 1;
+  padding: 36px 32px 32px 32px;
+  background: #f4f6fb;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+.dashboard-title {
+  font-size: 2.1rem;
+  font-weight: 700;
+  color: #232946;
+  margin-bottom: 18px;
+}
+.message-container {
+  margin-bottom: 18px;
+}
+.success-message, .error-message {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-size: 1.08rem;
+  font-weight: 500;
+}
+.success-message {
+  background: #e8f5e9;
+  color: #388e3c;
+}
+.error-message {
+  background: #ffebee;
+  color: #d32f2f;
+}
+.tab-content {
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 2px 12px rgba(44, 62, 80, 0.07);
+  padding: 28px 24px 24px 24px;
+  margin-bottom: 32px;
+}
+.section h3 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #232946;
+  margin-bottom: 18px;
+}
+
+// Responsive
+@media (max-width: 900px) {
+  .admin-dashboard-layout {
+    flex-direction: column;
+  }
+  .sidebar {
+    flex-direction: row;
+    width: 100%;
+    height: 60px;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 12px rgba(44, 62, 80, 0.07);
+    padding: 0 8px;
+  }
+  .sidebar-header {
+    padding: 0 12px;
+    font-size: 1.1rem;
+  }
+  .sidebar-nav {
+    flex-direction: row;
+    gap: 0;
+    padding: 0;
+  }
+  .nav-item {
+    flex-direction: column;
+    gap: 2px;
+    padding: 6px 8px;
+    font-size: 0.95rem;
+    border-radius: 6px;
+  }
+  .main-content {
+    padding: 18px 6px 12px 6px;
+  }
+  .tab-content {
+    padding: 14px 4px 10px 4px;
+  }
+}
+.status-canceled {
+  color: #e53935 !important;
+  font-weight: bold;
+}
+.search-field, mat-form-field {
+  width: 100%;
+  max-width: 350px;
+  margin-bottom: 25px;
+  box-sizing: border-box;
+  display: block;
+}
+
+mat-form-field {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  width: 100%;
+}
+
+mat-form-field .mat-form-field-wrapper {
+  padding-bottom: 0;
+}
+
+mat-form-field input, mat-form-field textarea {
+  font-size: 16px;
+  color: #2c3e50;
+}
+
+.dashboard-container {
+  min-height: 100vh;
+  width: 100vw;
+  padding: 0 0 40px 0;
+  margin: 0;
+  background-color: #f5f7fa;
+  border-radius: 0;
+  box-shadow: none;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+}
+
+.tab-content, .section {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto 30px auto;
+  padding: 0 24px;
+  box-sizing: border-box;
+}
+
+.dashboard-title {
+  text-align: center;
+  margin: 30px 0 30px 0;
+  font-size: 28px;
+  font-weight: 700;
+  color: #2c3e50;
+  letter-spacing: 0.5px;
+}
+
+.tabs {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.dashboard-title {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 28px;
+  font-weight: 700;
+  color: #2c3e50;
+  letter-spacing: 0.5px;
+}
+
+.tabs {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+
+  .tab-button {
+    min-width: 140px;
+    padding: 10px 20px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    background-color: #ffffff;
+    color: #34495e;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+    &.active {
+      background-color: #1976d2;
+      color: #ffffff;
+      box-shadow: 0 4px 12px rgba(25, 118, 210, 0.3);
+    }
+
+    &:hover:not(:disabled) {
+      background-color: #1565c0;
+      color: #ffffff;
+      transform: translateY(-2px);
+    }
+
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    mat-icon {
+      margin-right: 8px;
+      vertical-align: middle;
+    }
+  }
+}
+
+.message-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 25px;
+
+  .success-message {
+    display: flex;
+    align-items: center;
+    color: #2ecc71;
+    font-weight: 600;
+    background-color: #e8f5e9;
+    padding: 12px 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+
+    mat-icon {
+      margin-right: 10px;
+    }
+  }
+
+  .error-message {
+    display: flex;
+    align-items: center;
+    color: #e74c3c;
+    font-weight: 600;
+    background-color: #ffebee;
+    padding: 12px 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+
+    mat-icon {
+      margin-right: 10px;
+    }
+  }
+}
+
+.section {
+  margin-bottom: 50px;
+
+  h3 {
+    font-size: 24px;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 25px;
+    border-bottom: 2px solid #1976d2;
+    padding-bottom: 10px;
+  }
+
+  .add-washer-button,
+  .add-promo-code-button,
+  .add-service-plan-button,
+  .add-add-on-button {
+    margin-bottom: 25px;
+    display: flex;
+    justify-content: flex-end;
+
+    .action-button {
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+
+      &:hover:not(:disabled) {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(25, 118, 210, 0.3);
+      }
+    }
+  }
+
+  .search-field {
+    width: 100%;
+    max-width: 350px;
+    margin-bottom: 25px;
+
+    mat-form-field {
+      background-color: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+
+      .mat-form-field-wrapper {
+        padding-bottom: 0;
+      }
+
+      input {
+        font-size: 16px;
+        color: #2c3e50;
+      }
+    }
+  }
+
+  .form-card {
+    max-width: 700px;
+    margin: 0 auto 30px auto;
+    position: relative;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+
+    mat-card-title {
+      font-size: 20px;
+      font-weight: 600;
+      color: #2c3e50;
+      margin-bottom: 25px;
+    }
+
+    form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 25px;
+
+      mat-form-field {
+        width: 100%;
+        background-color: #f9fafb;
+        border-radius: 8px;
+
+        input, mat-select {
+          font-size: 16px;
+          color: #2c3e50;
+        }
+      }
+
+      .action-button {
+        grid-column: span 2;
+        justify-self: center;
+        padding: 10px 30px;
+        border-radius: 8px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+
+        &:hover:not(:disabled) {
+          transform: translateY(-2px);
+          box-shadow: 0 4px 12px rgba(25, 118, 210, 0.3);
+        }
+      }
+
+      .success-message,
+      .error-message {
+        grid-column: span 2;
+        text-align: center;
+        padding: 10px;
+        border-radius: 8px;
+      }
+    }
+  }
+
+  mat-table {
+    width: 100%;
+    background-color: #ffffff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+
+    mat-header-cell,
+    mat-cell {
+      padding: 12px 15px;
+      text-align: left;
+      font-size: 15px;
+      color: #2c3e50;
+    }
+
+    mat-header-cell {
+      background-color: #f1f3f5;
+      font-weight: 600;
+      color: #2c3e50;
+    }
+
+    mat-row {
+      transition: background-color 0.2s ease;
+
+      &:hover {
+        background-color: #f9fafb;
+      }
+    }
+
+    .status-online {
+      color: #2ecc71;
+      font-weight: 600;
+    }
+
+    .status-offline {
+      color: #e74c3c;
+      font-weight: 600;
+    }
+
+    .status-pending {
+      color: #f39c12;
+      font-weight: 600;
+    }
+
+    .status-accepted {
+      color: #3498db;
+      font-weight: 600;
+    }
+
+    .status-processing {
+      color: #9b59b6;
+      font-weight: 600;
+    }
+
+    .status-completed {
+      color: #2ecc71;
+      font-weight: 600;
+    }
+
+    .status-declined {
+      color: #e74c3c;
+      font-weight: 600;
+    }
+
+    .status-cancelled {
+      color: #7f8c8d;
+      font-weight: 600;
+    }
+
+    mat-icon-button {
+      transition: all 0.3s ease;
+
+      &:hover:not(:disabled) {
+        transform: scale(1.1);
+      }
+    }
+  }
+
+/* Orders table: modern, consistent styling with customers/washers */
+.modern-orders-table {
+  width: 100%;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+}
+.modern-orders-table mat-header-cell,
+.modern-orders-table th.mat-header-cell {
+  background: linear-gradient(90deg, #f5f9ff, #ffffff);
+  font-weight: 700;
+  color: #123;
+  padding: 12px 18px;
+  text-align: left;
+}
+.modern-orders-table mat-cell,
+.modern-orders-table td.mat-cell {
+  padding: 12px 18px;
+  vertical-align: middle;
+  color: #2c3e50;
+}
+.modern-orders-table .customer-avatar-list {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #e9f2ff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.modern-orders-table .customer-avatar-img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  display: block;
+}
+.modern-orders-table mat-row:hover,
+.modern-orders-table tr.mat-row:hover {
+  background: #f8fbff;
+}
+
+@media (max-width: 900px) {
+  .modern-orders-table thead { display: none; }
+  .modern-orders-table tr.mat-row { display: block; margin-bottom: 12px; border-radius: 8px; background: #fff; }
+  .modern-orders-table td.mat-cell { display: flex; justify-content: space-between; padding: 10px 12px; }
+  .modern-orders-table td.mat-cell::before { content: attr(data-label); font-weight: 600; color: #556; display: block; width: 45%; }
+}
+}
+
+/* Modern Orders Card Styles */
+.orders-card {
+  background: linear-gradient(180deg, #ffffff, #fbfdff);
+  border-radius: 14px;
+  padding: 12px;
+  box-shadow: 0 8px 36px rgba(18, 52, 86, 0.06);
+  margin-top: 18px;
+}
+.orders-card-header {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding: 8px 12px;
+  border-bottom: 1px solid rgba(2,6,23,0.04);
+  gap:12px;
+}
+.orders-card-title { display:flex; align-items:center; gap:10px; }
+.orders-card-title mat-icon { font-size: 28px; color:#1976d2 }
+.orders-card-title h4 { margin:0; font-weight:700; color:#233140 }
+.orders-card-actions { display:flex; gap:10px; align-items:center }
+.orders-card-body { padding: 12px 8px; }
+.orders-table-wrapper {
+  max-height: calc(100vh - 320px);
+  overflow: auto;
+  border-radius: 8px;
+  position: relative; /* create containing block for sticky children */
+}
+
+/* Sticky header for mat-table inside wrapper */
+.orders-table-wrapper .mat-header-row, .orders-table-wrapper .mat-header-cell {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  background: linear-gradient(90deg, #f5f9ff, #ffffff);
+}
+
+.orders-table-wrapper .mat-header-cell {
+  /* ensure header cells paint over sticky columns and body */
+  background-clip: padding-box;
+}
+
+/* Make action buttons stand out */
+.modern-orders-table .mat-icon-button { background: rgba(25,118,210,0.04); border-radius:6px }
+
+@media (max-width: 900px) {
+  .orders-card { padding: 8px; }
+  .orders-card-header { flex-direction: column; align-items: flex-start; gap:8px }
+  .orders-table-wrapper { max-height: calc(60vh); }
+}
+
+/* Zebra rows and subtle separators */
+.modern-orders-table tr.mat-row:nth-child(odd) { background: #ffffff; }
+.modern-orders-table tr.mat-row:nth-child(even) { background: #fbfdff; }
+.modern-orders-table mat-header-row, .modern-orders-table th.mat-header-cell { border-bottom: 2px solid rgba(2,6,23,0.06); }
+
+/* Ensure only table body scrolls while header stays visible */
+.orders-table-wrapper {
+  /* Keep native table layout so columns align. The wrapper provides the scroll area. */
+  will-change: transform;
+}
+
+.orders-table-wrapper .mat-table {
+  width: 100%;
+  table-layout: fixed; /* keep column widths stable */
+  border-collapse: separate;
+}
+
+/* Sticky left columns (ID, Customer ID, Customer) so identifier columns remain visible while scrolling.
+   Applied only to larger viewports to avoid interfering with mobile stacked layout. */
+@media (min-width: 900px) {
+  .orders-table-wrapper .mat-table { position: relative; }
+
+  /* ID column (left-most) */
+  .orders-table-wrapper .mat-column-id .mat-header-cell,
+  .orders-table-wrapper .mat-column-id .mat-cell {
+    position: sticky;
+    left: 0;
+    z-index: 12; /* above normal header/body */
+    min-width: 80px;
+    max-width: 80px;
+    width: 80px;
+    background: linear-gradient(90deg, #f5f9ff, #ffffff);
+    box-shadow: 2px 0 6px rgba(2,6,23,0.04);
+  }
+
+  /* Customer ID column (next to ID) */
+  .orders-table-wrapper .mat-column-userId .mat-header-cell,
+  .orders-table-wrapper .mat-column-userId .mat-cell {
+    position: sticky;
+    left: 80px; /* sits to the right of ID column */
+    z-index: 11;
+    min-width: 120px;
+    max-width: 120px;
+    width: 120px;
+    background: linear-gradient(90deg, #f5f9ff, #ffffff);
+    box-shadow: 2px 0 6px rgba(2,6,23,0.03);
+  }
+
+  /* Customer name / avatar column (third column) */
+  .orders-table-wrapper .mat-column-customerName .mat-header-cell,
+  .orders-table-wrapper .mat-column-customerName .mat-cell {
+    position: sticky;
+    left: 200px; /* 80 + 120 */
+    z-index: 10;
+    min-width: 220px;
+    max-width: 320px;
+    width: 220px;
+    background: linear-gradient(90deg, #f5f9ff, #ffffff);
+    box-shadow: 2px 0 6px rgba(2,6,23,0.02);
+  }
+
+  /* Ensure header intersection (top + left) sits above body cells */
+  .orders-table-wrapper .mat-header-cell {
+    z-index: 15;
+  }
+}
+
+/* Header cells are sticky — they remain visible while the wrapper scrolls. */
+.orders-table-wrapper .mat-header-row,
+.orders-table-wrapper .mat-header-cell {
+  position: sticky;
+  top: 0;
+  z-index: 6;
+  background: linear-gradient(90deg, #f5f9ff, #ffffff);
+}
+
+.orders-table-wrapper .mat-table {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
+
+/* Keep header row visually fixed (table header group) and body rows as normal table rows
+   so position:sticky on header and sticky columns behaves correctly inside the scrollable wrapper. */
+.orders-table-wrapper .mat-header-row {
+  display: table-header-group;
+}
+.orders-table-wrapper .mat-row {
+  display: table-row;
+}
+.orders-table-wrapper .mat-header-cell,
+.orders-table-wrapper .mat-cell {
+  display: table-cell;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Avatar fallback styling: ensure customer profile shows correctly */
+.modern-orders-table .customer-avatar-list img, .modern-orders-table .customer-avatar-list mat-icon { display:block; width:40px; height:40px; }
+
+.loading-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+  border-radius: 12px;
+}
+
+// Snackbar Success Custom Style
+.snackbar-success {
+  background: #43a047 !important;
+  color: #fff !important;
+  font-weight: 600;
+  font-size: 1.08rem;
+  letter-spacing: 0.5px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(44, 62, 80, 0.15);
+}
+

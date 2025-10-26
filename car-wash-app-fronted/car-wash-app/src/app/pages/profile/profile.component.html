@@ -1,0 +1,78 @@
+<div class="container" *ngIf="user">
+  <h3 style="color:#ffc107; letter-spacing:1px;">{{ getProfileTitle() }}</h3>
+  <h1>{{ user.fullName }}'s Profile</h1>
+
+  <!-- PROFILE HEADER -->
+  <div class="profile-header">
+    <div class="profile-info">
+      <img *ngIf="user.profilePicture; else avatarFallback" [src]="getProfilePictureUrl(user.profilePicture)" alt="Profile Picture" class="avatar" (error)="handleImageError($event)">
+      <ng-template #avatarFallback>
+        <div class="avatar">{{ user.fullName.charAt(0) }}</div>
+      </ng-template>
+      <div class="washer-details">
+        <h2>{{ user.fullName }}</h2>
+        <div class="washer-role">{{ user.role }}</div>
+        <div class="washer-contact">
+          <div><i>📧</i> <span>{{ user.email }}</span></div>
+          <div><i>📞</i> <span>{{ user.phone || 'Not provided' }}</span></div>
+          <div><i>🆔</i> <span>{{ user.id }}</span></div>
+        </div>
+        <button mat-raised-button color="primary" (click)="editProfile()">Edit Profile</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- STATS SECTION -->
+  <div class="stats-section" *ngIf="user.role === 'WASHER'">
+    <div class="card">
+      <h3>Average Rating</h3>
+      <div class="rating-value">{{ averageRating | number:'1.1-1' }}</div>
+      <p>Based on {{ reviewsReceived.length }} reviews</p>
+    </div>
+
+    <div class="card">
+      <h3>Quick Stats</h3>
+      <div class="quick-stats">
+        <div><span>{{ reviewsReceived.length }}</span>Total Reviews</div>
+        <div><span>{{ fiveStarCount }}</span>5-Star Reviews</div>
+        <div><span>{{ satisfaction }}%</span>Satisfaction</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- REVIEWS SECTION -->
+  <div class="reviews" *ngIf="user?.role !== 'ADMIN'">
+    <h2>{{ getReviewsTitle() }}</h2>
+    <div class="review-grid" *ngIf="reviewsReceived.length > 0; else noReceivedReviews">
+      <div class="review-card" *ngFor="let review of reviewsReceived">
+        <div class="review-stars">
+          <span *ngFor="let star of getStarArray(review.rating)">★</span>
+          <span *ngFor="let star of getEmptyStarArray(review.rating)">☆</span>
+        </div>
+        <div class="review-comment">{{ review.comment || 'No comment' }}</div>
+        <div class="review-author"><i>👤</i> {{ review.customerName || review.washerName }} <br><small>{{ review.customerId || review.washerId }}</small></div>
+      </div>
+    </div>
+    <ng-template #noReceivedReviews>
+      <p>No reviews yet.</p>
+    </ng-template>
+  </div>
+
+  <!-- REVIEWS GIVEN SECTION -->
+  <div class="reviews" *ngIf="user?.role !== 'ADMIN'">
+    <h2>{{ getReviewsGivenTitle() }}</h2>
+    <div class="review-grid" *ngIf="reviewsGiven.length > 0; else noGivenReviews">
+      <div class="review-card" *ngFor="let review of reviewsGiven">
+        <div class="review-stars">
+          <span *ngFor="let star of getStarArray(review.rating)">★</span>
+          <span *ngFor="let star of getEmptyStarArray(review.rating)">☆</span>
+        </div>
+        <div class="review-comment">{{ review.comment || 'No comment' }}</div>
+        <div class="review-author"><i>👤</i> {{ review.washerName }} <br><small>{{ review.washerId }}</small></div>
+      </div>
+    </div>
+    <ng-template #noGivenReviews>
+      <p>No reviews yet.</p>
+    </ng-template>
+  </div>
+</div>

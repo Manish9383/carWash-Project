@@ -1,0 +1,51 @@
+<div class="review-container">
+  <header class="review-header">
+    <h2>Reviews Given by You</h2>
+    <button mat-button (click)="goBack()" class="back-button">
+      <mat-icon>arrow_back</mat-icon> Back to Dashboard
+    </button>
+  </header>
+
+  <section class="review-content">
+    <div *ngIf="loading" class="loading">
+      <mat-spinner diameter="40"></mat-spinner>
+      <span>Loading reviews...</span>
+    </div>
+
+    <div *ngIf="errorMessage" class="error-message">
+      <mat-icon>error_outline</mat-icon>
+      <span>{{ errorMessage }}</span>
+    </div>
+
+    <div *ngIf="!loading && !errorMessage" class="reviews-table-section">
+      <mat-table [dataSource]="reviews" class="mat-elevation-z8">
+        <ng-container matColumnDef="customerName">
+          <mat-header-cell *matHeaderCellDef>Customer Name</mat-header-cell>
+          <mat-cell *matCellDef="let review">{{ review.customerName }}</mat-cell>
+        </ng-container>
+        
+        <ng-container matColumnDef="rating">
+          <mat-header-cell *matHeaderCellDef>Rating</mat-header-cell>
+          <mat-cell *matCellDef="let review">{{ review.rating }}/5</mat-cell>
+        </ng-container>
+        
+        <ng-container matColumnDef="comment">
+          <mat-header-cell *matHeaderCellDef>Comment</mat-header-cell>
+          <mat-cell *matCellDef="let review">{{ review.comment || 'N/A' }}</mat-cell>
+        </ng-container>
+        
+        <ng-container matColumnDef="bookingId">
+          <mat-header-cell *matHeaderCellDef>Booking ID</mat-header-cell>
+          <mat-cell *matCellDef="let review">{{ review.bookingId }}</mat-cell>
+        </ng-container>
+        
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+      
+      <div *ngIf="reviews.data.length === 0" class="no-reviews">
+        No reviews given yet.
+      </div>
+    </div>
+  </section>
+</div>

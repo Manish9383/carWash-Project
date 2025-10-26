@@ -1,0 +1,64 @@
+<div class="booking-history-bg">
+  <div class="container">
+    <div class="header-row">
+      <h2 class="head"><mat-icon class="head-icon">history</mat-icon> Booking History</h2>
+      <div class="header-actions">
+        <app-notification></app-notification>
+      </div>
+    </div>
+
+    <div *ngIf="loading" class="loading">
+      <mat-spinner diameter="32"></mat-spinner> Loading booking history...
+    </div>
+    <div *ngIf="errorMessage" class="error">
+      <mat-icon color="warn">error</mat-icon> {{ errorMessage }}
+    </div>
+    <div *ngIf="!loading && bookings.length === 0 && !errorMessage" class="no-bookings">
+      <mat-icon>info</mat-icon> No bookings found.
+    </div>
+
+    <div *ngIf="!loading && bookings.length > 0" class="booking-list">
+      <div *ngFor="let booking of bookings" class="booking-card">
+        <div class="card-header">
+          <div class="car-id"><mat-icon>directions_car</mat-icon> {{ booking.carId }}</div>
+          <span class="status-badge" [ngClass]="getStatusClass(booking.status)">
+            <mat-icon *ngIf="booking.status === 'PENDING'">hourglass_empty</mat-icon>
+            <mat-icon *ngIf="booking.status === 'ASSIGNED'">assignment_ind</mat-icon>
+            <mat-icon *ngIf="booking.status === 'PROCESSING'">build_circle</mat-icon>
+            <mat-icon *ngIf="booking.status === 'COMPLETED'">check_circle</mat-icon>
+            <mat-icon *ngIf="booking.status === 'CANCELLED'">cancel</mat-icon>
+            {{ booking.status | uppercase }}
+          </span>
+        </div>
+        <div class="card-body">
+          <div class="info-row"><mat-icon>confirmation_number</mat-icon> <strong>Booking ID:</strong> {{ booking.id }}</div>
+          <div class="info-row"><mat-icon>person</mat-icon> <strong>User ID:</strong> {{ booking.userId }}</div>
+          <div class="info-row"><mat-icon>local_offer</mat-icon> <strong>Package:</strong> {{ booking.washPackage | titlecase }}</div>
+          <div class="info-row"><mat-icon>schedule</mat-icon> <strong>Scheduled Time:</strong> {{ booking.scheduledTime | date:'MMM d, y, h:mm a' }}</div>
+          <div class="info-row"><mat-icon>place</mat-icon> <strong>Location:</strong> {{ booking.location }}</div>
+          <div class="info-row"><mat-icon>credit_card</mat-icon> <strong>Payment Status:</strong> {{ booking.paymentStatus }}</div>
+          <div class="card-actions">
+            <button *ngIf="booking.status === 'PROCESSING'" class="review-btn" (click)="completeBooking($event, booking)">
+              <mat-icon>check_circle</mat-icon> Complete Booking
+            </button>
+            <button *ngIf="booking.status === 'COMPLETED' && !booking.reviewId && booking.washerId" 
+                    class="review-btn"
+                    (click)="leaveReview(booking.id, booking.washerId)">
+              <mat-icon>rate_review</mat-icon> Leave a Review
+            </button>
+            <button *ngIf="booking.status === 'COMPLETED'" 
+                    class="view-receipt-btn"
+                    (click)="viewReceipt(booking.id)">
+              <mat-icon>receipt_long</mat-icon> View Receipt
+            </button>
+            <button *ngIf="canCancel(booking)"
+                    class="cancel-btn"
+                    (click)="cancelBooking(booking)">
+              <mat-icon>cancel</mat-icon> {{ userRole === 'CUSTOMER' ? 'Cancel Booking' : 'Decline Booking' }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

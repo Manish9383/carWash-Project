@@ -1,0 +1,72 @@
+.payment-modal {
+    background: linear-gradient(135deg, #ffffff, #f0f4f8);
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  h2 {
+    color: #3f51b5;
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .payment-details {
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .payment-details p {
+    margin: 10px 0;
+    font-size: 16px;
+    color: #333;
+  }
+  
+  .payment-details strong {
+    color: #3f51b5;
+  }
+  
+  #dropin-container {
+    margin: 20px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: #fff;
+  }
+  
+  .error {
+    color: #ff4444;
+    text-align: center;
+    margin-top: 10px;
+  }
+  
+  mat-dialog-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+  }
+  
+  button {
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+  }
+  
+  button[color="primary"] {
+    background-color: #3f51b5;
+    color: white;
+  }
+  
+  button[color="primary"]:hover {
+    background-color: #303f9f;
+  }
+  
+  button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+  }

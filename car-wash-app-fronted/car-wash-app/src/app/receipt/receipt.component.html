@@ -1,0 +1,41 @@
+<div class="receipt-container">
+  <h2 class="receipt-title">📄 Payment Receipt</h2>
+  <div class="header-actions">
+    <app-notification></app-notification>
+  </div>
+
+  <!-- Loading Indicator -->
+  <div *ngIf="loading" class="loading">
+    ⏳ Loading receipt...
+  </div>
+
+  <!-- Error Message -->
+  <div *ngIf="errorMessage && !loading" class="error">
+    ❌ {{ errorMessage }}
+  </div>
+
+  <!-- No Receipts Found -->
+  <div *ngIf="!loading && !errorMessage && receipts.length === 0" class="no-receipts">
+    <p>⚠️ No receipt found for this booking.</p>
+  </div>
+
+  <!-- Receipt Display -->
+  <div *ngIf="receipts.length > 0" class="receipt-grid">
+    <div *ngFor="let receipt of receipts" class="receipt-card">
+      <img [src]="receipt.afterWashPhotoUrl" alt="After Wash" class="car-photo" *ngIf="receipt.afterWashPhotoUrl" />
+      <div class="receipt-details">
+        <p><strong>🚗 Car Model:</strong> {{ receipt.carModel || 'N/A' }}</p>
+        <p><strong>🛠️ Package:</strong> {{ receipt.packageName || 'N/A' }}</p>
+        <p><strong>➕ Extra Add-ons:</strong> {{ receipt.addOns || 'None' }}</p>
+        <p><strong>💵 Total Amount:</strong> ${{ receipt.totalAmount || 0 }}</p>
+        <p><strong>📅 Date:</strong> {{ receipt.paymentDate ? (receipt.paymentDate | date:'medium') : 'N/A' }}</p>
+        <p><strong>🆔 Transaction ID:</strong> {{ receipt.transactionId || receipt.id || 'N/A' }}</p>
+        <p><strong>✅ Payment Status:</strong> {{ receipt.paymentStatus || 'N/A' }}</p>
+      </div>
+      <div class="receipt-actions">
+        <button class="action-btn share-btn" (click)="shareReceipt(receipt)">🔗 Share</button>
+        <button class="action-btn download-btn" (click)="downloadReceipt(receipt)">🖨️ Download</button>
+      </div>
+    </div>
+  </div>
+</div>

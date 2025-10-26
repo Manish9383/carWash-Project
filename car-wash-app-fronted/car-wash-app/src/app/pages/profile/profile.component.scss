@@ -1,0 +1,197 @@
+/* -------- GLOBAL STYLES -------- */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+  background: #0d0d0d;
+  color: #fff;
+}
+
+h1, h2, h3 {
+  margin: 0;
+}
+
+.container {
+  width: 90%;
+  max-width: 1100px;
+  margin: 40px auto;
+}
+
+/* -------- PROFILE HEADER -------- */
+.profile-header {
+  background: linear-gradient(145deg, #141414, #0a0a0a);
+  border-radius: 20px;
+  padding: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 0 20px rgba(255, 193, 7, 0.2);
+  transition: transform 0.3s ease;
+}
+
+.profile-header:hover {
+  transform: scale(1.02);
+}
+
+.profile-info {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.avatar {
+  background: radial-gradient(circle, #ffc107, #ff9800);
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  font-weight: bold;
+  color: #000;
+}
+
+.washer-details h2 {
+  font-size: 1.6rem;
+  font-weight: 600;
+}
+
+.washer-role {
+  color: #ffc107;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.washer-contact {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.9rem;
+}
+
+.washer-contact i {
+  color: #ffc107;
+  margin-right: 5px;
+}
+
+/* -------- RATING & STATS -------- */
+.stats-section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-top: 30px;
+  gap: 20px;
+}
+
+.card {
+  background: linear-gradient(145deg, #141414, #0a0a0a);
+  flex: 1;
+  min-width: 300px;
+  border-radius: 15px;
+  padding: 25px;
+  box-shadow: 0 0 15px rgba(255, 193, 7, 0.1);
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  box-shadow: 0 0 25px rgba(255, 193, 7, 0.3);
+  transform: translateY(-5px);
+}
+
+.rating-value {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #ffc107;
+}
+
+.stars {
+  margin: 10px 0;
+}
+
+.star {
+  color: #ffc107;
+  font-size: 1.3rem;
+}
+
+.quick-stats {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.quick-stats div {
+  font-size: 1rem;
+  color: #ffffff;
+}
+
+.quick-stats span {
+  display: block;
+  font-size: 1.8rem;
+  color: #ffc107;
+  font-weight: 600;
+}
+
+/* -------- REVIEWS SECTION -------- */
+.reviews {
+  margin-top: 40px;
+}
+
+.reviews h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  font-size: 1.5rem;
+  letter-spacing: 1px;
+}
+
+.review-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 20px;
+}
+
+.review-card {
+  background: linear-gradient(145deg, #141414, #0a0a0a);
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 0 15px rgba(255, 193, 7, 0.1);
+  transition: all 0.3s ease;
+}
+
+.review-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 25px rgba(255, 193, 7, 0.3);
+}
+
+.review-stars {
+  color: #ffc107;
+  margin-bottom: 10px;
+}
+
+.review-comment {
+  margin-bottom: 15px;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.review-author {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
+.review-author i {
+  color: #ffc107;
+}
+
+/* -------- RESPONSIVE -------- */
+@media (max-width: 768px) {
+  .profile-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+}

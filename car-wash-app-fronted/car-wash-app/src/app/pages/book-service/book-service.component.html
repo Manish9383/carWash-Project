@@ -1,0 +1,194 @@
+<div class="modern-container">
+  <div class="content-wrapper">
+    <div class="form-section">
+      <div class="form-header">
+        <h2>Book Your Car Wash</h2>
+        <p>Experience premium car care at your doorstep</p>
+      </div>
+
+      <form (ngSubmit)="initPayment()" class="book-service-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="carId">Car Model</label>
+            <input
+              id="carId"
+              type="text"
+              placeholder="Enter Car Model"
+              [(ngModel)]="booking.carId"
+              name="carId"
+              required
+              class="form-control"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="washPackage">Choose Package</label>
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-select
+                id="washPackage"
+                [(ngModel)]="booking.washPackage"
+                name="washPackage"
+                required
+                (selectionChange)="updateAmount()"
+              >
+                <mat-option *ngFor="let plan of servicePlans" [value]="plan.name">
+                  {{ plan.name }} (${{ plan.price | number: '1.2-2' }})
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="addOnIds">Select Add-Ons</label>
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-select
+              id="addOnIds"
+              [(ngModel)]="booking.addOnIds"
+              name="addOnIds"
+              multiple
+              (selectionChange)="updateAmount()"
+            >
+              <mat-option *ngFor="let addOn of addOns" [value]="addOn.id">
+                {{ addOn.name }} (${{ addOn.price | number: '1.2-2' }})
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="scheduledTime">Scheduled Time</label>
+            <input
+              id="scheduledTime"
+              type="datetime-local"
+              [(ngModel)]="booking.scheduledTime"
+              name="scheduledTime"
+              required
+              [min]="minDate"
+              step="900"
+              class="form-control"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="location">Location</label>
+            <mat-form-field appearance="outline" class="full-width">
+              <input
+                matInput
+                id="location"
+                [(ngModel)]="booking.location"
+                name="location"
+                placeholder="e.g., 123 Main St, City"
+                required
+              />
+              <mat-icon matSuffix (click)="openGoogleMaps(booking.location)" class="map-icon">place</mat-icon>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="notes">Additional Notes</label>
+          <mat-form-field appearance="outline" class="full-width">
+            <textarea
+              matInput
+              id="notes"
+              rows="3"
+              placeholder="Any special instructions..."
+              [(ngModel)]="booking.notes"
+              name="notes"
+            ></textarea>
+          </mat-form-field>
+        </div>
+
+        <!-- Promo Code Section -->
+        <div class="promo-section">
+          <h3><mat-icon class="section-icon">local_offer</mat-icon> Promo Code</h3>
+          <div class="promo-input-group">
+            <mat-form-field appearance="outline" class="promo-input">
+              <mat-label>Enter Promo Code</mat-label>
+              <input
+                matInput
+                placeholder="e.g., SAVE20"
+                [(ngModel)]="promoCode"
+                name="promoCode"
+                autocomplete="off"
+              />
+              <mat-icon matSuffix *ngIf="!promoCode">tag</mat-icon>
+            </mat-form-field>
+            <button
+              mat-raised-button
+              color="accent"
+              (click)="applyPromoCode()"
+              [disabled]="loading"
+              class="apply-btn"
+            >
+              <mat-icon *ngIf="!loading">check_circle</mat-icon>
+              <mat-icon *ngIf="loading" class="spinning">refresh</mat-icon>
+              {{ loading ? 'Applying...' : 'Apply' }}
+            </button>
+          </div>
+          <div *ngIf="successMessage" class="success-message animate-in">
+            <mat-icon class="message-icon">check_circle</mat-icon>
+            <span>{{ successMessage }}</span>
+          </div>
+          <div *ngIf="errorMessage" class="error-message animate-in">
+            <mat-icon class="message-icon">error</mat-icon>
+            <span>{{ errorMessage }}</span>
+          </div>
+        </div>
+
+        <!-- Pricing Summary -->
+        <div class="pricing-summary">
+          <h3><mat-icon class="section-icon">receipt</mat-icon> Pricing Summary</h3>
+          <div class="price-breakdown">
+            <div class="price-row">
+              <span class="price-label">Subtotal</span>
+              <span class="price-value">${{ amount | number:'1.2-2' }}</span>
+            </div>
+            <div *ngIf="discountedAmount !== null" class="price-row discount-row animate-in">
+              <span class="price-label discount-label">
+                <mat-icon class="discount-icon">local_offer</mat-icon>
+                Promo Discount
+              </span>
+              <span class="price-value discount-value">-${{ (amount - discountedAmount) | number:'1.2-2' }}</span>
+            </div>
+            <div class="divider"></div>
+            <div class="price-row total-row">
+              <span class="price-label total-label">
+                <mat-icon class="total-icon">payment</mat-icon>
+                Total to Pay
+              </span>
+              <span class="price-value total-value">${{ (discountedAmount !== null ? discountedAmount : amount) | number:'1.2-2' }}</span>
+            </div>
+          </div>
+          <div *ngIf="discountedAmount !== null" class="savings-badge animate-in">
+            <mat-icon class="savings-icon">celebration</mat-icon>
+            You saved ${{ (amount - discountedAmount) | number:'1.2-2' }}!
+          </div>
+        </div>
+
+        <div class="form-footer">
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" [(ngModel)]="booking.acknowledged" name="acknowledged" required />
+              I accept the Terms of Use & Privacy Policy.
+            </label>
+          </div>
+
+          <button mat-raised-button color="primary" type="submit" [disabled]="loading || !booking.washPackage" class="submit-btn">
+            {{ loading ? 'Processing...' : 'Proceed to Payment' }}
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <div class="image-section image-fullscreen">
+      <img
+        src="https://img.freepik.com/premium-vector/man-washing-red-car-with-bubbles-using-hose-flat-vector-illustration-style-showcasing-clean-tidy-atmosphere_95264-9350.jpg?w=1480"
+        alt="Car Wash Illustration"
+        class="hero-image"
+      />
+    </div>
+  </div>
+</div>

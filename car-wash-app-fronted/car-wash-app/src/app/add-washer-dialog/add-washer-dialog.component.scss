@@ -1,0 +1,12 @@
+.add-washer-dialog {
+  width: 420px;
+  padding: 20px;
+  background: linear-gradient(180deg,#fff,#fbfdff);
+  border-radius: 14px;
+  box-shadow: 0 12px 36px rgba(18,52,86,0.08);
+}
+.add-washer-dialog .header { display:flex; justify-content:space-between; align-items:center; gap:12px }
+.add-washer-dialog h3 { margin:0; font-size:1.25rem }
+.add-washer-dialog .form-body { display:flex; flex-direction:column; gap:12px; margin-top:12px }
+.add-washer-dialog .actions { display:flex; justify-content:flex-end; gap:10px; margin-top:6px }
+.add-washer-dialog .error { color:#c62828; margin-top:8px }
