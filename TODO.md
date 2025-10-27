@@ -1,7 +1,7 @@
 # TODO: Deploy Car Wash Application
 
 ## Deployment Steps
-- [ ] Push to GitHub (create public repo)
+- [x] Push to GitHub (create public repo)
 - [ ] Deploy to Render (free tier):
   - [ ] Deploy eureka-server first
   - [ ] Deploy all microservices
