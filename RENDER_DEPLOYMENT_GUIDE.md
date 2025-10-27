@@ -53,14 +53,14 @@ This guide provides a deployment strategy using Render and other free platforms,
 7. Wait for service to be ready (5-10 minutes)
 8. Go to "Overview" tab
 9. Copy the connection details:
-   - Host
-   - Port
-   - Username
-   - Password
-   - Database name
+   - Host: `carwash-db-manu975269-7220.h.aivencloud.com`
+   - Port: `18002`
+   - Username: `avnadmin`
+   - Password: (click to reveal in Aiven dashboard)
+   - Database name: `carwash-db`
 10. The connection string will look like:
     ```
-    mysql://username:password@host:port/database
+    mysql://avnadmin:<your-password>@carwash-db-manu975269-7220.h.aivencloud.com:18002/carwash-db
     ```
 
 ### 2.2 MongoDB Atlas Setup
@@ -72,31 +72,33 @@ This guide provides a deployment strategy using Render and other free platforms,
 6. Choose "Connect your application"
 7. Copy the connection string:
    ```
-   mongodb+srv://username:password@cluster.mongodb.net/database
+   mongodb+srv://<db_username>:<db_password>@cluster0.gbzqn.mongodb.net/?appName=Cluster0
    ```
 
 ### 2.3 CloudAMQP Setup
 1. In CloudAMQP dashboard, your instance should be created
 2. Click on your instance name
 3. Copy the connection details:
-   - AMQP URL
-   - Username
-   - Password
-   - Virtual Host
+   - AMQP URL: `amqps://yXLgxxxxx:***@gull.rmq.cloudamqp.com/yXLgxxxxx`
+   - Username: `yXLgxxxxx`
+   - Password: `yXLgxxxxx`
+   - Virtual Host: `yXLgxxxxx`
+   - Host: `gull.rmq.cloudamqp.com`
+   - Ports: `5672 (5671 for TLS)`
 
 ## Step 3: Prepare Your Code for Deployment
 
 ### 3.1 Update Application Properties
-Create `application-prod.properties` in each service's `src/main/resources/`:
+Create `application-prod.properties` in each service's `src/main/resources/` (already done):
 
 **For user-service:**
 ```properties
 spring.profiles.active=prod
 
 # Database
-spring.datasource.url=jdbc:mysql://your-aiven-host:port/carwash-db
-spring.datasource.username=your-aiven-username
-spring.datasource.password=your-aiven-password
+spring.datasource.url=jdbc:mysql://carwash-db-manu975269-7220.h.aivencloud.com:18002/carwash-db
+spring.datasource.username=avnadmin
+spring.datasource.password=<your-aiven-password>
 spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
 
 # JPA
@@ -118,19 +120,19 @@ server.port=8081
 spring.profiles.active=prod
 
 # MySQL Database
-spring.datasource.url=jdbc:mysql://your-aiven-host:port/carwash-db
-spring.datasource.username=your-aiven-username
-spring.datasource.password=your-aiven-password
+spring.datasource.url=jdbc:mysql://carwash-db-manu975269-7220.h.aivencloud.com:18002/carwash-db
+spring.datasource.username=avnadmin
+spring.datasource.password=<your-aiven-password>
 
 # MongoDB
-spring.data.mongodb.uri=mongodb+srv://username:password@cluster.mongodb.net/carwash
+spring.data.mongodb.uri=mongodb+srv://<db_username>:<db_password>@cluster0.gbzqn.mongodb.net/carwash
 
 # RabbitMQ
-spring.rabbitmq.host=your-cloudamqp-host
+spring.rabbitmq.host=gull.rmq.cloudamqp.com
 spring.rabbitmq.port=5672
-spring.rabbitmq.username=your-cloudamqp-username
-spring.rabbitmq.password=your-cloudamqp-password
-spring.rabbitmq.virtual-host=your-vhost
+spring.rabbitmq.username=yXLgxxxxx
+spring.rabbitmq.password=yXLgxxxxx
+spring.rabbitmq.virtual-host=yXLgxxxxx
 
 # Eureka
 eureka.client.service-url.defaultZone=http://eureka-server:8761/eureka/
@@ -192,7 +194,7 @@ Repeat for each service, setting appropriate environment variables:
 - Root Directory: `carwashBackend/CArWash  BAcked/user-service`
 - Environment variables:
   - `SPRING_PROFILES_ACTIVE`: `prod`
-  - `MYSQL_URL`: `mysql://username:password@host/database?sslaccept=strict`
+  - `MYSQL_URL`: `mysql://avnadmin:<your-aiven-password>@carwash-db-manu975269-7220.h.aivencloud.com:18002/carwash-db?sslaccept=strict`
   - `JWT_SECRET`: `your-jwt-secret`
 
 **Booking Service:**
@@ -200,9 +202,9 @@ Repeat for each service, setting appropriate environment variables:
 - Root Directory: `carwashBackend/CArWash  BAcked/booking-service`
 - Environment variables:
   - `SPRING_PROFILES_ACTIVE`: `prod`
-  - `MYSQL_URL`: `mysql://username:password@host/database?sslaccept=strict`
-  - `MONGODB_URI`: `your-mongodb-connection-string`
-  - `CLOUDAMQP_URL`: `your-cloudamqp-connection-string`
+  - `MYSQL_URL`: `mysql://avnadmin:<your-aiven-password>@carwash-db-manu975269-7220.h.aivencloud.com:18002/carwash-db?sslaccept=strict`
+  - `MONGODB_URI`: `mongodb+srv://<db_username>:<db_password>@cluster0.gbzqn.mongodb.net/carwash`
+  - `CLOUDAMQP_URL`: `amqps://yXLgxxxxx:yXLgxxxxx@gull.rmq.cloudamqp.com/yXLgxxxxx`
 
 **Repeat for notification-service, review-service, payment-service, car-service**
 
