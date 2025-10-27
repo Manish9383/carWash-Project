@@ -171,7 +171,7 @@ eureka:
 2. Configure service:
    - Name: `eureka-server`
    - Environment: `Docker`
-   - Root Directory: `carwashBackend/CArWash  BAcked/eureka-server`
+   - Root Directory: `carwashBackend/CArWash_Backend/eureka-server`
    - Docker Command: (leave default)
 3. Environment variables:
    - `SPRING_PROFILES_ACTIVE`: `prod`
@@ -181,7 +181,7 @@ eureka:
 1. Create another web service
 2. Name: `api-gateway`
 3. Environment: `Docker`
-4. Root Directory: `carwashBackend/CArWash  BAcked/api-gateway`
+4. Root Directory: `carwashBackend/CArWash_Backend/api-gateway`
 5. Environment variables:
    - `SPRING_PROFILES_ACTIVE`: `prod`
    - `EUREKA_URI`: `http://eureka-server:8761/eureka/`
@@ -191,7 +191,7 @@ Repeat for each service, setting appropriate environment variables:
 
 **User Service:**
 - Name: `user-service`
-- Root Directory: `carwashBackend/CArWash  BAcked/user-service`
+- Root Directory: `carwashBackend/CArWash_Backend/user-service`
 - Environment variables:
   - `SPRING_PROFILES_ACTIVE`: `prod`
   - `MYSQL_URL`: `mysql://avnadmin:<your-aiven-password>@carwash-db-manu975269-7220.h.aivencloud.com:18002/carwash-db?sslaccept=strict`
@@ -199,7 +199,7 @@ Repeat for each service, setting appropriate environment variables:
 
 **Booking Service:**
 - Name: `booking-service`
-- Root Directory: `carwashBackend/CArWash  BAcked/booking-service`
+- Root Directory: `carwashBackend/CArWash_Backend/booking-service`
 - Environment variables:
   - `SPRING_PROFILES_ACTIVE`: `prod`
   - `MYSQL_URL`: `mysql://avnadmin:<your-aiven-password>@carwash-db-manu975269-7220.h.aivencloud.com:18002/carwash-db?sslaccept=strict`
