@@ -6,7 +6,7 @@ This guide provides a deployment strategy using Render and other free platforms,
 **Free Platforms Used:**
 - Render (backend microservices - 750 hours/month free)
 - Vercel (frontend)
-- PlanetScale (MySQL database)
+- Aiven (MySQL database)
 - MongoDB Atlas (MongoDB database)
 - CloudAMQP (RabbitMQ)
 
@@ -23,11 +23,11 @@ This guide provides a deployment strategy using Render and other free platforms,
 2. Click "Sign Up" → "Continue with GitHub"
 3. Authorize Render to access your GitHub account
 
-### 1.3 PlanetScale (MySQL Database)
-1. Go to https://planetscale.com
+### 1.3 Aiven (MySQL Database)
+1. Go to https://aiven.io
 2. Click "Sign Up" → "Continue with GitHub"
 3. Complete onboarding
-4. Create a database (free tier: 1 database, 1GB storage, 100M row reads/month)
+4. Create a MySQL service (free tier: 1GB storage, 1 CPU, 512MB RAM)
 
 ### 1.4 MongoDB Atlas (MongoDB Database)
 1. Go to https://mongodb.com/atlas
@@ -43,16 +43,25 @@ This guide provides a deployment strategy using Render and other free platforms,
 
 ## Step 2: Set Up Databases
 
-### 2.1 PlanetScale Setup
-1. In PlanetScale dashboard, click "Create Database"
-2. Name: `carwash-db`
-3. Region: Choose nearest to you
-4. Click "Create Database"
-5. Go to "Connect" tab
-6. Copy the connection string (it will look like):
-   ```
-   mysql://username:password@host/database?sslaccept=strict
-   ```
+### 2.1 Aiven Setup
+1. In Aiven dashboard, click "Create service"
+2. Select "MySQL" from the service list
+3. Choose "Hobbyist" plan (free tier)
+4. Name: `carwash-db`
+5. Region: Choose nearest to you
+6. Click "Create service"
+7. Wait for service to be ready (5-10 minutes)
+8. Go to "Overview" tab
+9. Copy the connection details:
+   - Host
+   - Port
+   - Username
+   - Password
+   - Database name
+10. The connection string will look like:
+    ```
+    mysql://username:password@host:port/database
+    ```
 
 ### 2.2 MongoDB Atlas Setup
 1. In Atlas dashboard, click "Create" → "M0 Cluster"
@@ -85,9 +94,9 @@ Create `application-prod.properties` in each service's `src/main/resources/`:
 spring.profiles.active=prod
 
 # Database
-spring.datasource.url=jdbc:mysql://your-planetscale-host:3306/carwash-db
-spring.datasource.username=your-planetscale-username
-spring.datasource.password=your-planetscale-password
+spring.datasource.url=jdbc:mysql://your-aiven-host:port/carwash-db
+spring.datasource.username=your-aiven-username
+spring.datasource.password=your-aiven-password
 spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
 
 # JPA
@@ -109,9 +118,9 @@ server.port=8081
 spring.profiles.active=prod
 
 # MySQL Database
-spring.datasource.url=jdbc:mysql://your-planetscale-host:3306/carwash-db
-spring.datasource.username=your-planetscale-username
-spring.datasource.password=your-planetscale-password
+spring.datasource.url=jdbc:mysql://your-aiven-host:port/carwash-db
+spring.datasource.username=your-aiven-username
+spring.datasource.password=your-aiven-password
 
 # MongoDB
 spring.data.mongodb.uri=mongodb+srv://username:password@cluster.mongodb.net/carwash
@@ -258,7 +267,7 @@ spring:
 ## Cost Optimization
 
 - Render: Stay within 750 hours/month free quota
-- PlanetScale: Monitor row reads (100M free/month)
+- Aiven: Monitor usage (1GB storage, 1 CPU, 512MB RAM free)
 - MongoDB Atlas: Stay within 512MB storage
 - CloudAMQP: Monitor message count (1M free/month)
 
