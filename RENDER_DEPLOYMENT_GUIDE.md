@@ -6,7 +6,7 @@ This guide provides a deployment strategy using Render and other free platforms,
 **Free Platforms Used:**
 - Render (backend microservices - 750 hours/month free)
 - Vercel (frontend)
-- Supabase (PostgreSQL database)
+- PlanetScale (MySQL database)
 - MongoDB Atlas (MongoDB database)
 - CloudAMQP (RabbitMQ)
 
@@ -23,10 +23,11 @@ This guide provides a deployment strategy using Render and other free platforms,
 2. Click "Sign Up" → "Continue with GitHub"
 3. Authorize Render to access your GitHub account
 
-### 1.3 Supabase (PostgreSQL Database)
-1. Go to https://supabase.com
-2. Click "Start your project" → "Continue with GitHub"
+### 1.3 PlanetScale (MySQL Database)
+1. Go to https://planetscale.com
+2. Click "Sign Up" → "Continue with GitHub"
 3. Complete onboarding
+4. Create a database (free tier: 1 database, 1GB storage, 100M row reads/month)
 
 ### 1.4 MongoDB Atlas (MongoDB Database)
 1. Go to https://mongodb.com/atlas
@@ -42,17 +43,15 @@ This guide provides a deployment strategy using Render and other free platforms,
 
 ## Step 2: Set Up Databases
 
-### 2.1 Supabase Setup
-1. In Supabase dashboard, click "New Project"
+### 2.1 PlanetScale Setup
+1. In PlanetScale dashboard, click "Create Database"
 2. Name: `carwash-db`
-3. Database Password: Choose a strong password
-4. Region: Choose nearest to you
-5. Click "Create new project"
-6. Wait for setup to complete
-7. Go to Settings → Database
-8. Copy the connection string (it will look like):
+3. Region: Choose nearest to you
+4. Click "Create Database"
+5. Go to "Connect" tab
+6. Copy the connection string (it will look like):
    ```
-   postgresql://postgres:[password]@db.[project-ref].supabase.co:5432/postgres
+   mysql://username:password@host/database?sslaccept=strict
    ```
 
 ### 2.2 MongoDB Atlas Setup
@@ -86,15 +85,14 @@ Create `application-prod.properties` in each service's `src/main/resources/`:
 spring.profiles.active=prod
 
 # Database
-spring.datasource.url=jdbc:postgresql://db.[project-ref].supabase.co:5432/postgres
-spring.datasource.username=postgres
-spring.datasource.password=your-supabase-password
-spring.datasource.driver-class-name=org.postgresql.Driver
+spring.datasource.url=jdbc:mysql://your-planetscale-host:3306/carwash-db
+spring.datasource.username=your-planetscale-username
+spring.datasource.password=your-planetscale-password
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
 
 # JPA
 spring.jpa.hibernate.ddl-auto=update
 spring.jpa.show-sql=false
-spring.jpa.database-platform=org.hibernate.dialect.PostgreSQLDialect
 
 # Eureka
 eureka.client.service-url.defaultZone=http://eureka-server:8761/eureka/
@@ -110,11 +108,10 @@ server.port=8081
 ```properties
 spring.profiles.active=prod
 
-# PostgreSQL Database
-spring.datasource.url=jdbc:postgresql://db.[project-ref].supabase.co:5432/postgres
-spring.datasource.username=postgres
-spring.datasource.password=your-supabase-password
-spring.datasource.driver-class-name=org.postgresql.Driver
+# MySQL Database
+spring.datasource.url=jdbc:mysql://your-planetscale-host:3306/carwash-db
+spring.datasource.username=your-planetscale-username
+spring.datasource.password=your-planetscale-password
 
 # MongoDB
 spring.data.mongodb.uri=mongodb+srv://username:password@cluster.mongodb.net/carwash
@@ -186,7 +183,7 @@ Repeat for each service, setting appropriate environment variables:
 - Root Directory: `carwashBackend/CArWash  BAcked/user-service`
 - Environment variables:
   - `SPRING_PROFILES_ACTIVE`: `prod`
-  - `DATABASE_URL`: `postgresql://postgres:password@db.project-ref.supabase.co:5432/postgres`
+  - `MYSQL_URL`: `mysql://username:password@host/database?sslaccept=strict`
   - `JWT_SECRET`: `your-jwt-secret`
 
 **Booking Service:**
@@ -194,7 +191,7 @@ Repeat for each service, setting appropriate environment variables:
 - Root Directory: `carwashBackend/CArWash  BAcked/booking-service`
 - Environment variables:
   - `SPRING_PROFILES_ACTIVE`: `prod`
-  - `DATABASE_URL`: `postgresql://postgres:password@db.project-ref.supabase.co:5432/postgres`
+  - `MYSQL_URL`: `mysql://username:password@host/database?sslaccept=strict`
   - `MONGODB_URI`: `your-mongodb-connection-string`
   - `CLOUDAMQP_URL`: `your-cloudamqp-connection-string`
 
@@ -261,7 +258,7 @@ spring:
 ## Cost Optimization
 
 - Render: Stay within 750 hours/month free quota
-- Supabase: Monitor usage (500MB database, 50MB file storage free)
+- PlanetScale: Monitor row reads (100M free/month)
 - MongoDB Atlas: Stay within 512MB storage
 - CloudAMQP: Monitor message count (1M free/month)
 
