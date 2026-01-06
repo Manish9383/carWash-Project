@@ -1,8 +1,8 @@
-# i-Transform – On-Demand Car Wash 🚗💧
+## Aquawash – On-Demand Car Wash 🚗💧
 
 ## Overview
 
-**i-Transform** is a full-stack, microservices-based on-demand car wash platform that connects customers with professional car washers at their preferred location. Users can book instant or scheduled car wash services, choose packages and add-ons, make secure payments, and provide reviews and ratings. The system is designed for scalability, reliability, and a seamless user experience, targeting the **USA market**.
+**Aquawash** is a full-stack, microservices-based on-demand car wash platform that connects customers with professional car washers at their preferred location. Users can book instant or scheduled car wash services, choose packages and add-ons, make secure payments, and provide reviews and ratings. The system is designed for scalability, reliability, and a seamless user experience, targeting the **USA market**.
 
 The application follows modern **microservices architecture** principles using Spring Boot on the backend and Angular on the frontend, with event-driven communication and cloud-ready deployments.
 
